@@ -12,8 +12,10 @@ If you want to run this on your local machine, do this and that.
 
 ## Built With
 * Web framework
-* Dependency management
-* MongoDB probs
+* Python [version]
+* Dependency management system
+* MongoDB
+* PyCharm
 
 ## Versioning
 
