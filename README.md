@@ -11,9 +11,8 @@ Be a person.
 If you want to run this on your local machine, do this and that.
 
 ## Built With
-* Web framework
-* Python [version]
-* Dependency management system
+* Python 3.8.0
+* Flask
 * MongoDB & monogoengine
 * PyCharm
 
