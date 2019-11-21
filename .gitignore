@@ -1,2 +1,8 @@
 # Ignore .idea folder
 .idea/
+
+# Ignore application critical vars
+application.yml
+
+*/__pycache__/
+*/data/__pycache__/

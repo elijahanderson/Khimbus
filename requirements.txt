@@ -1,5 +1,7 @@
 # Dependencies
+dnspython
 flask
 flask-pymongo
 mongoengine
 pymongo
+pyyaml
