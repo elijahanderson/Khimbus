@@ -6,3 +6,5 @@ application.yml
 
 */__pycache__/
 */data/__pycache__/
+*/client/__pycache__/
+*/client/views/__pycache__/
