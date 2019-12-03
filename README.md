@@ -5,10 +5,18 @@ Khimbus is a cloud-based database management system for KHIT consulting, designe
 First version still in development. There will eventually be a webpage to navigate to for normal users.
 
 ### Prerequisites
-Be a person.
+* Python 3.8.*
+* Pip 19.*
 
 ### Installing & Running
-If you want to run this on your local machine, do this and that.
+1. Switch to the dev branch (unless you want an empty application)
+2. Copy the repository address: `https://github.com/elijahanderson/Khimbus.git`
+3. Open your command line/terminal, `cd` to the directory you want the project in, then `git clone https://github.com/elijahanderson/Khimbus.git`
+4. Install the required packages: `pip install -r requirements.txt`
+5. Once everything is installed correctly, `cd src`
+6. Now run the application: `python main.py`
+7. Open `http://127.0.0.1:5000/` in a web browser. You should now be able to use the latest development version of the site.
+
 
 ## Built With
 * Python 3.8.0
