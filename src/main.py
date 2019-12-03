@@ -6,7 +6,7 @@ from client.app import app
 def main():
     """ Runs the application. """
     mongo_setup.global_init()
-    app.run()
+    app.run(debug=True)
 
 if __name__ == "__main__":
     main()
