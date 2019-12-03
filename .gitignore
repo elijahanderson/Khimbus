@@ -6,7 +6,7 @@ application.yml
 
 */__pycache__/
 */data/__pycache__/
-src/client/views/__pycache__/__init__.cpython-38.pyc
-src/client/__pycache__/app.cpython-38.pyc
-src/client/views/__pycache__/about_page.cpython-38.pyc
-src/client/views/__pycache__/home_page.cpython-38.pyc
+*/client/views/__pycache__/__init__.cpython-38.pyc
+*/client/__pycache__/app.cpython-38.pyc
+*/client/views/__pycache__/about_page.cpython-38.pyc
+*/client/views/__pycache__/home_page.cpython-38.pyc
