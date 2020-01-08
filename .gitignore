@@ -4,9 +4,19 @@
 # Ignore application critical vars
 application.yml
 
-*/__pycache__/
-*/data/__pycache__/
-*/client/views/__pycache__/__init__.cpython-38.pyc
-*/client/__pycache__/app.cpython-38.pyc
-*/client/views/__pycache__/about_page.cpython-38.pyc
-*/client/views/__pycache__/home_page.cpython-38.pyc
+src/__pycache__/
+src/data/__pycache__/
+src/client/views/__pycache__/
+src/client/__pycache__/
+src/client/views/__pycache__/
+src/client/views/__pycache__/
+src/infrastructure/__pycache__/
+src/services/__pycache__/
+src/client/views/__pycache__/user_views.cpython-38.pyc
+src/client/__pycache__/app.cpython-38.pyc
+src/client/views/__pycache__/about_page.cpython-38.pyc
+src/client/views/__pycache__/home_page.cpython-38.pyc
+test/__pycache__/__init__.cpython-38.pyc
+test/client/__pycache__/__init__.cpython-38.pyc
+test/client/__pycache__/test_client.cpython-38.pyc
+src/client/forms/__pycache__/

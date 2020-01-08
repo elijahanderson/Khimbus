@@ -1,0 +1,393 @@
+{% extends "layout.html" %}
+{% block content %}
+      <h2 style = "text-align: center;">Client Registration</h2>
+
+      {% for message in form.firstname.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.lastname.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.middlename.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.gender.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.genderID.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+        
+      {% for message in form.sexual_orientation.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.race.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.ethnicity.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.ssn.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.site_location.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.medicaid_number.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.phone_home.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+        
+      {% for message in form.phone_cell.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.phone_work.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.email.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.contact_pref.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.address_type.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.street_address.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.city.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.state.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.zip_code.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+        
+      {% for message in form.guardian_name.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.guardian_type.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.guardian_phone.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.ER_name.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.ER_relationship.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.ER_phone.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.ER_address.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.ER_email.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.can_visit.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.can_pickup.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.dob.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.intake_date.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.discharge_date.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.is_veteran.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.veteran_status.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.marital_status.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.div_reason.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.disability.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.disability_desc.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.accomodations.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.employment_status.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.education_level.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.spoken_langs.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.reading_langs.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+         <form method=POST action="{{ url_for('client_views.create_client') }}">
+            <fieldset>
+                {{ form.hidden_tag() }}
+                <div>
+                    <h4>Names & Identifying Info</h4>
+                    <br>
+                    {{ form.firstname.label }}
+                    {{ form.firstname }}
+                    <br>
+                    <br>
+                    {{ form.lastname.label }}
+                    {{ form.lastname }}
+                    <br>
+                    <br>
+                    {{ form.middlename.label }}
+                    {{ form.middlename }}
+                    <br>
+                    <br>
+                    {{ form.gender.label }}
+                    {{ form.gender }}
+                    <br>
+                    <br>
+                    {{ form.genderID.label }}
+                    {{ form.genderID }}
+                    <br>
+                    <br>
+                    {{ form.sexual_orientation.label }}
+                    {{ form.sexual_orientation }}
+                    <br>
+                    <br>
+                    {{ form.race.label }}
+                    {{ form.race }}
+                    <br>
+                    <br>
+                    {{ form.ethnicity.label }}
+                    {{ form.ethnicity }}
+                    <br>
+                    <br>
+                    {{ form.ssn.label }}
+                    {{ form.ssn }}
+                    <br>
+                    <br>
+                    {{ form.site_location.label }}
+                    {{ form.site_location }}
+                    <br>
+                    <br>
+                    <h4>Medicaid Info</h4>
+                    <br>
+                    {{ form.medicaid_number.label }}
+                    {{ form.medicaid_number }}
+                    <br>
+                    <br>
+                    <h4>Contact Info</h4>
+                    <br>
+                    {{ form.phone_home.label }}
+                    {{ form.phone_home }}
+                    <br>
+                    <br>
+                    {{ form.phone_cell.label }}
+                    {{ form.phone_cell }}
+                    <br>
+                    <br>
+                    {{ form.phone_work.label }}
+                    {{ form.phone_work }}
+                    <br>
+                    <br>
+                    {{ form.email.label }}
+                    {{ form.email }}
+                    <br>
+                    <br>
+                    {{ form.contact_pref.label }}
+                    {{ form.contact_pref }}
+                    <br>
+                    <br>
+                    <h4>Address Info</h4>
+                    <br>
+                    {{ form.address_type.label }}
+                    {{ form.address_type }}
+                    <br>
+                    <br>
+                    {{ form.street_address.label }}
+                    {{ form.street_address }}
+                    <br>
+                    <br>
+                    {{ form.city.label }}
+                    {{ form.city }}
+                    <br>
+                    <br>
+                    {{ form.state.label }}
+                    {{ form.state }}
+                    <br>
+                    <br>
+                    {{ form.zip_code.label }}
+                    {{ form.zip_code }}
+                    <br>
+                    <br>
+                    <h4>Guardian Info</h4>
+                    <br>
+                    {{ form.guardian_name.label }}
+                    {{ form.guardian_name }}
+                    <br>
+                    <br>
+                    {{ form.guardian_type.label }}
+                    {{ form.guardian_type }}
+                    <br>
+                    <br>
+                    {{ form.guardian_phone.label }}
+                    {{ form.guardian_phone }}
+                    <br>
+                    <br>
+                    <h4>Emergency Contact Info</h4>
+                    <br>
+                    {{ form.ER_name.label }}
+                    {{ form.ER_name }}
+                    <br>
+                    <br>
+                    {{ form.ER_relationship.label }}
+                    {{ form.ER_relationship }}
+                    <br>
+                    <br>
+                    {{ form.ER_phone.label }}
+                    {{ form.ER_phone }}
+                    <br>
+                    <br>
+                    {{ form.ER_address.label }}
+                    {{ form.ER_address }}
+                    <br>
+                    <br>
+                    {{ form.ER_email.label }}
+                    {{ form.ER_email }}
+                    <br>
+                    <br>
+                    {{ form.can_visit.label }}
+                    {{ form.can_visit }}
+                    <br>
+                    <br>
+                    {{ form.can_pickup.label }}
+                    {{ form.can_pickup }}
+                    <br>
+                    <br>
+                    <h4>Demographics</h4>
+                    <br>
+                    {{ form.dob.label }}
+                    {{ form.dob }}
+                    <br>
+                    <br>
+                    {{ form.intake_date.label }}
+                    {{ form.intake_date }}
+                    <br>
+                    <br>
+                    {{ form.discharge_date.label }}
+                    {{ form.discharge_date }}
+                    <br>
+                    <br>
+                    {{ form.is_veteran.label }}
+                    {{ form.is_veteran }}
+                    <br>
+                    <br>
+                    {{ form.veteran_status.label }}
+                    {{ form.veteran_status }}
+                    <br>
+                    <br>
+                    {{ form.marital_status.label }}
+                    {{ form.marital_status }}
+                    <br>
+                    <br>
+                    {{ form.div_reason.label }}
+                    {{ form.div_reason }}
+                    <br>
+                    <br>
+                    <h4>Disabilities</h4>
+                    <br>
+                    {{ form.disability.label }}
+                    {{ form.disability }}
+                    <br>
+                    <br>
+                    {{ form.disability_desc.label }}
+                    {{ form.disability_desc }}
+                    <br>
+                    <br>
+                    {{ form.accomodations.label }}
+                    {{ form.accomodations }}
+                    <br>
+                    <br>
+                    <h4>Employment & Education</h4>
+                    <br>
+                    {{ form.employment_status.label }}
+                    {{ form.employment_status }}
+                    <br>
+                    <br>
+                    {{ form.education_level.label }}
+                    {{ form.education_level }}
+                    <br>
+                    <br>
+                    {{ form.spoken_langs.label }}
+                    {{ form.spoken_langs }}
+                    <br>
+                    <br>
+                    {{ form.reading_langs.label }}
+                    {{ form.reading_langs }}
+                    <br>
+                    <br>
+                    {{ form.submit }}
+                    <br>
+                    <br>
+                </div>
+            </fieldset>
+         </form>
+{% endblock content %}

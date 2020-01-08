@@ -1,7 +1,12 @@
 # Dependencies
+bson
 dnspython
 flask
 flask-pymongo
+flask-mongoengine
+mock
 mongoengine
 pymongo
 pyyaml
+werkzeug
+wtforms

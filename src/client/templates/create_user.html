@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+{% block content %}
+      <h1>User Registration</h1>
+      <br>
+      {% for message in form.username.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.password.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+         <form method=POST action="{{ url_for('user_views.create_user') }}">
+            <fieldset>
+                {{ form.hidden_tag() }}
+                <div>
+                    {{ form.username.label }}
+                    {{ form.username }}
+                    <br>
+                    <br>
+                    {{ form.password.label }}
+                    {{ form.password }}
+                    <br>
+                    <br>
+                    {{ form.confirm.label }}
+                    {{ form.confirm }}
+                    <br>
+                    <br>
+                    {{ form.submit }}
+                </div>
+            </fieldset>
+         </form>
+{% endblock content %}
