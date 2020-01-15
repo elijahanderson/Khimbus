@@ -2,6 +2,7 @@
 bson
 dnspython
 flask
+flask-login
 flask-pymongo
 flask-mongoengine
 mock

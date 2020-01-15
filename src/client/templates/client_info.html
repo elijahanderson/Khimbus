@@ -1,6 +1,28 @@
 {% extends "layout.html" %}
 {% block content %}
-    <header class="site-header">
+    <div class="main-header">
         <h1>Client Information</h1>
-    </header>
+        <br>
+        {% for message in form.search_by.errors %}
+        <div>{{ message }}</div>
+        {% endfor %}
+
+        {% for message in form.search.errors %}
+        <div>{{ message }}</div>
+        {% endfor %}
+
+        <form method=POST action="{{ url_for('client_views.client_info') }}">
+            <fieldset>
+                {{ form.hidden_tag() }}
+                <div>
+                    {{ form.search_by.label }}
+                    {{ form.search_by }}
+                    <br>
+                    <br>
+                    <i class="fa fa-search"></i>
+                    {{ form.search }}
+                </div>
+            </fieldset>
+        </form>
+    </div>
 {% endblock content %}

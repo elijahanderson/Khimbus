@@ -11,14 +11,16 @@ class Client(me.Document):
     program_ids: list of IDs of the programs the client is registered in -- weak relationship to the programs collection
     """
     # names / identifying info
+    clientID = me.StringField(required=False)
     firstname = me.StringField(required=True)
     lastname = me.StringField(required=True)
     middlename = me.StringField(required=False)
-    gender = me.StringField(required=True)
-    genderID = me.StringField(required=False)
-    sexual_orientation = me.StringField(required=False)
-    race = me.StringField(required=True)  # required, but can decline to provide
-    ethnicity = me.StringField(required=False)
+    suffix = me.StringField(required=False)
+    gender = me.ListField(required=True)
+    genderID = me.ListField(required=False)
+    sexual_orientation = me.ListField(required=False)
+    race = me.ListField(required=True)  # required, but can decline to provide
+    ethnicity = me.ListField(required=False)
     ssn = me.IntField(required=True)
     site_location = me.StringField(required=True)
     # medicaid info -- { medicaid_number: int, effective_date: dt, expiration_date: dt }
@@ -53,8 +55,8 @@ class Client(me.Document):
     disabilities = me.DictField(required=False)
 
     # employment / education
-    employment_status = me.StringField(required=True)
-    education_level = me.StringField(required=False)
+    employment_status = me.ListField(required=True)
+    education_level = me.ListField(required=False)
 
     # languages
     spoken_langs = me.ListField(required=True)

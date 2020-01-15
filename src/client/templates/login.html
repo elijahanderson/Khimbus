@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
-      <h1>Sign In</h1>
+    <div class="main-header">
+      <h1>Log In</h1>
       <br>
       {% for message in form.username.errors %}
          <div>{{ message }}</div>
@@ -26,4 +27,5 @@
                 </div>
             </fieldset>
          </form>
+    </div>
 {% endblock content %}

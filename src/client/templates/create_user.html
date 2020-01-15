@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
+    <div class="main-header">
       <h1>User Registration</h1>
       <br>
       {% for message in form.username.errors %}
@@ -7,6 +8,30 @@
       {% endfor %}
 
       {% for message in form.password.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.firstname.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.lastname.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.work_email.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.phone.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.job_title.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.supervisor.errors %}
          <div>{{ message }}</div>
       {% endfor %}
 
@@ -22,6 +47,30 @@
                     {{ form.password }}
                     <br>
                     <br>
+                    {{ form.firstname.label }}
+                    {{ form.firstname }}
+                    <br>
+                    <br>
+                    {{ form.lastname.label }}
+                    {{ form.lastname }}
+                    <br>
+                    <br>
+                    {{ form.work_email.label }}
+                    {{ form.work_email }}
+                    <br>
+                    <br>
+                    {{ form.phone.label }}
+                    {{ form.phone }}
+                    <br>
+                    <br>
+                    {{ form.job_title.label }}
+                    {{ form.job_title }}
+                    <br>
+                    <br>
+                    {{ form.supervisor.label }}
+                    {{ form.supervisor }}
+                    <br>
+                    <br>
                     {{ form.confirm.label }}
                     {{ form.confirm }}
                     <br>
@@ -30,4 +79,5 @@
                 </div>
             </fieldset>
          </form>
+    </div>
 {% endblock content %}

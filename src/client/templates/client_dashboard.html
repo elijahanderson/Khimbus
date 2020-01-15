@@ -1,28 +1,14 @@
 {% extends "layout.html" %}
 {% block content %}
-    <header class="site-header">
+    <div class="client-header">
         <h1>Client Dashboard</h1>
-        <div class="row">
-            <div class="span4">
-                <ul style="list-style-type:none;">
-                    <li><a class="btn" href="/my-client">My Client</a></li>
-                    <li><a class="btn" href="/client-info">Client Information</a></li>
-                    <li><a class="btn" href="/client-mgmt">Client Management</a></li>
-                    <li><a class="btn" href="/referrals">Referrals</a></li>
-                    <li><a class="btn" href="/client-reports">Reports</a></li>
-                    <li><a class="btn" href="/state-reporting">State Reporting</a></li>
-                </ul>
-            </div>
-            <div class="span4">
-                <ul style="list-style-type:none"
-                    <li>&nbsp</li>
-                </ul>
-            </div>
-            <div class="span4">
-                <ul style="list-style-type:none;">
-                    <li><a class="btn" href="/create-client">Register New Client</a></li>
-                </ul>
-            </div>
-        </div>
-    </header>
+        <br>
+        <h4>Clients</h4>
+        <ul style="list-style-type:none;">
+            {% for client in clients %}
+            <li><a class="btn" href={{ client_urls[loop.index-1] }}>{{ client.firstname }} {{ client.lastname }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
 {% endblock content %}

@@ -19,7 +19,7 @@ class FlaskClientTest(unittest.TestCase):
 
     def setUp(self):
         """ Setup. """
-        with open('C:/Programming/Khimbus/src/config/application.yml', 'r') as yml:
+        with open('D:/Programming/KHIT/Khimbus/src/config/application.yml', 'r') as yml:
             self.conf = yaml.safe_load(yml)
             self.username = self.conf['mongouser']['username']
             self.pwd = self.conf['mongouser']['password']
@@ -47,7 +47,7 @@ class FlaskClientTest(unittest.TestCase):
         """ Test home page redirects to login page if user not in session. """
         response = self.test_app.get('/', follow_redirects=True)
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b'Sign In', response.data)
+        self.assertIn(b'Log In', response.data)
 
     def test_about_page_renders_successfully(self):
         """ Test about page renders correctly. """
@@ -73,7 +73,14 @@ class FlaskClientTest(unittest.TestCase):
         """ Test user login success behaves correctly. """
         user_mock.return_value = ('testuser', 'password')
         response = self.test_app.post('/login',
-                                      data=dict(username='testuser', password='password'),
+                                      data=dict(username='testuser',
+                                                password='password',
+                                                firstname='firstname',
+                                                lastname='lastname',
+                                                work_email='email@email.com',
+                                                phone='000000000000',
+                                                job_title='job title',
+                                                supervisor='supervisor'),
                                       follow_redirects=True)
         user_mock.assert_called_once()
         login_mock.assert_called_once()
@@ -84,7 +91,14 @@ class FlaskClientTest(unittest.TestCase):
         """ Test user cannot login if not found in database. """
         user_mock.return_value = None
         response = self.test_app.post('/login',
-                                      data=dict(username='testuser', password='password'),
+                                      data=dict(username='testuser',
+                                                password='password',
+                                                firstname='firstname',
+                                                lastname='lastname',
+                                                work_email='email@email.com',
+                                                phone='000000000000',
+                                                job_title='job title',
+                                                supervisor='supervisor'),
                                       follow_redirects=True)
         user_mock.assert_called_once()
         self.assertIn(b'Server could not find specified username.', response.data)
@@ -94,7 +108,14 @@ class FlaskClientTest(unittest.TestCase):
         """ Test user cannot login with incorrect password. """
         user_mock.return_value = ('testuser', 'password123')
         response = self.test_app.post('/login',
-                                      data=dict(username='testuser', password='password'),
+                                      data=dict(username='testuser',
+                                                password='password',
+                                                firstname='firstname',
+                                                lastname='lastname',
+                                                work_email='email@email.com',
+                                                phone='000000000000',
+                                                job_title='job title',
+                                                supervisor='supervisor'),
                                       follow_redirects=True)
         user_mock.assert_called_once()
         self.assertIn(b'Password is incorrect.', response.data)
@@ -105,13 +126,20 @@ class FlaskClientTest(unittest.TestCase):
         """ Test logout behaves correctly. """
         user_mock.return_value = ('testuser', 'password123')
         response_login = self.test_app.post('/login',
-                                data=dict(username='testuser', password='password123'),
+                                data=dict(username='testuser',
+                                                password='password',
+                                                firstname='firstname',
+                                                lastname='lastname',
+                                                work_email='email@email.com',
+                                                phone='000000000000',
+                                                job_title='job title',
+                                                supervisor='supervisor'),
                                 follow_redirects=True)
         user_mock.assert_called_once()
         login_mock.assert_called_once()
         self.assertIn(b'Khimbus', response_login.data)
         response = self.test_app.get('/logout', follow_redirects=True)
-        self.assertIn(b'Sign In', response.data)
+        self.assertIn(b'Log In', response.data)
 
     @mock.patch('src.client.views.user_views.find_user_by_username')
     @mock.patch('src.client.views.user_views.login_user')
@@ -119,7 +147,14 @@ class FlaskClientTest(unittest.TestCase):
         """ Test client dashboard renders correctly. """
         user_mock.return_value = ('testuser', 'password123')
         login_response = self.test_app.post('/login',
-                                      data=dict(username='testuser', password='password123'),
+                                      data=dict(username='testuser',
+                                                password='password',
+                                                firstname='firstname',
+                                                lastname='lastname',
+                                                work_email='email@email.com',
+                                                phone='000000000000',
+                                                job_title='job title',
+                                                supervisor='supervisor'),
                                       follow_redirects=True)
         user_mock.assert_called_once()
         login_mock.assert_called_once()
@@ -132,7 +167,14 @@ class FlaskClientTest(unittest.TestCase):
         """ Test my client page renders correctly. """
         user_mock.return_value = ('testuser', 'password')
         login_response = self.test_app.post('/login',
-                                            data=dict(username='testuser', password='password'),
+                                            data=dict(username='testuser',
+                                                password='password',
+                                                firstname='firstname',
+                                                lastname='lastname',
+                                                work_email='email@email.com',
+                                                phone='000000000000',
+                                                job_title='job title',
+                                                supervisor='supervisor'),
                                             follow_redirects=True)
         user_mock.assert_called_once()
         login_mock.assert_called_once()
@@ -145,7 +187,14 @@ class FlaskClientTest(unittest.TestCase):
         """ Test client info page renders correctly. """
         user_mock.return_value = ('testuser', 'password')
         login_response = self.test_app.post('/login',
-                                            data=dict(username='testuser', password='password'),
+                                            data=dict(username='testuser',
+                                                password='password',
+                                                firstname='firstname',
+                                                lastname='lastname',
+                                                work_email='email@email.com',
+                                                phone='000000000000',
+                                                job_title='job title',
+                                                supervisor='supervisor'),
                                             follow_redirects=True)
         user_mock.assert_called_once()
         login_mock.assert_called_once()
@@ -158,7 +207,14 @@ class FlaskClientTest(unittest.TestCase):
         """ Test client management page renders correctly. """
         user_mock.return_value = ('testuser', 'password')
         login_response = self.test_app.post('/login',
-                                            data=dict(username='testuser', password='password'),
+                                            data=dict(username='testuser',
+                                                password='password',
+                                                firstname='firstname',
+                                                lastname='lastname',
+                                                work_email='email@email.com',
+                                                phone='000000000000',
+                                                job_title='job title',
+                                                supervisor='supervisor'),
                                             follow_redirects=True)
         user_mock.assert_called_once()
         login_mock.assert_called_once()
@@ -171,7 +227,14 @@ class FlaskClientTest(unittest.TestCase):
         """ Test referrals page renders correctly. """
         user_mock.return_value = ('testuser', 'password')
         login_response = self.test_app.post('/login',
-                                            data=dict(username='testuser', password='password'),
+                                            data=dict(username='testuser',
+                                                password='password',
+                                                firstname='firstname',
+                                                lastname='lastname',
+                                                work_email='email@email.com',
+                                                phone='000000000000',
+                                                job_title='job title',
+                                                supervisor='supervisor'),
                                             follow_redirects=True)
         user_mock.assert_called_once()
         login_mock.assert_called_once()
@@ -184,7 +247,14 @@ class FlaskClientTest(unittest.TestCase):
         """ Test client reports page renders correctly. """
         user_mock.return_value = ('testuser', 'password')
         login_response = self.test_app.post('/login',
-                                            data=dict(username='testuser', password='password'),
+                                            data=dict(username='testuser',
+                                                password='password',
+                                                firstname='firstname',
+                                                lastname='lastname',
+                                                work_email='email@email.com',
+                                                phone='000000000000',
+                                                job_title='job title',
+                                                supervisor='supervisor'),
                                             follow_redirects=True)
         user_mock.assert_called_once()
         login_mock.assert_called_once()
@@ -197,7 +267,14 @@ class FlaskClientTest(unittest.TestCase):
         """ Test state reporting page renders correctly. """
         user_mock.return_value = ('testuser', 'password')
         login_response = self.test_app.post('/login',
-                                            data=dict(username='testuser', password='password'),
+                                            data=dict(username='testuser',
+                                                password='password',
+                                                firstname='firstname',
+                                                lastname='lastname',
+                                                work_email='email@email.com',
+                                                phone='000000000000',
+                                                job_title='job title',
+                                                supervisor='supervisor'),
                                             follow_redirects=True)
         user_mock.assert_called_once()
         login_mock.assert_called_once()
@@ -212,12 +289,13 @@ class FlaskClientTest(unittest.TestCase):
     def test_logout_requires_login(self):
         """ Test logout first requires user to login. """
         response = self.test_app.get('/logout', follow_redirects=True)
-        self.assertIn(b'Sign In', response.data)
+        self.assertIn(b'Log In', response.data)
 
     def test_page_not_found_error(self):
         """ Test random endpoint returns page not found error. """
         response = self.test_app.get('/asdf')
         self.assertEqual(response.status_code, 404)
+
 
 if __name__ == '__main__':
     unittest.main()

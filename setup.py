@@ -11,7 +11,7 @@ setup(
     author='Eli Anderson',
     author_email='dispentia@gmail.com',
     url='https://github.com/elijahanderson/Khimbus',
-    install_requires=[ 'bson','dnspython', 'flask', 'flask-pymongo', 'flask-mongoengine', 'mock', 'mongoengine',
+    install_requires=[ 'bson','dnspython', 'flask', 'flask-login', 'flask-pymongo', 'flask-mongoengine', 'mock', 'mongoengine',
                        'pymongo', 'pyyaml', 'werkzeug','wtforms'],
     packages=find_packages()
 )

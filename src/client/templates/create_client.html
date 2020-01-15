@@ -1,12 +1,21 @@
 {% extends "layout.html" %}
 {% block content %}
+    <div class="main-header">
       <h2 style = "text-align: center;">Client Registration</h2>
+
+      {% for message in form.clientID.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
 
       {% for message in form.firstname.errors %}
          <div>{{ message }}</div>
       {% endfor %}
 
       {% for message in form.lastname.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.suffix.errors %}
          <div>{{ message }}</div>
       {% endfor %}
 
@@ -188,6 +197,10 @@
                 <div>
                     <h4>Names & Identifying Info</h4>
                     <br>
+                    {{ form.clientID.label }}
+                    {{ form.clientID }}
+                    <br>
+                    <br>
                     {{ form.firstname.label }}
                     {{ form.firstname }}
                     <br>
@@ -198,6 +211,10 @@
                     <br>
                     {{ form.middlename.label }}
                     {{ form.middlename }}
+                    <br>
+                    <br>
+                    {{ form.suffix.label }}
+                    {{ form.suffix }}
                     <br>
                     <br>
                     {{ form.gender.label }}
@@ -390,4 +407,5 @@
                 </div>
             </fieldset>
          </form>
+    </div>
 {% endblock content %}

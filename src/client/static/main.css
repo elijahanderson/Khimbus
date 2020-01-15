@@ -2,6 +2,11 @@ body {
   background: #fafafa;
   color: #333333;
   margin-top: 5rem;
+  height: 100%;
+}
+
+html {
+  height: 100%;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -21,11 +26,84 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .site-header .span4 .btn:hover {
-  color: #5f788a;
+  color: #ffffff;
 }
 
 .site-header .navbar-nav .nav-link.active {
   font-weight: 500;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapper .sidebar .btn:hover {
+  color: #ffffff;
+}
+
+.client-header a:hover {
+  color: #cbd5db;
+}
+
+.client-header h4 {
+  margin-left: 30px;
+}
+
+.main-header {
+  position: relative;
+  text-align: left;
+  margin-left: 100px;
+}
+
+.client-header {
+  position: relative;
+  text-align: left;
+  margin-left: 100px;
+}
+
+.wrapper .sidebar {
+  width: 200px;
+  height: 300%;
+  position: absolute;
+  background-color: #5f7777;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  margin-top: 50px;
+  background-image: linear-gradient(#5f7777 60%, #fafafa);
+}
+
+.wrapper .sidebar h4 {
+  color: #ffffff;
+  margin-left: 30px;
+}
+
+.wrapper .sidebar a {
+  color: #cbd5db;
+  text-align: left;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+table {
+  width: 100%;
+  table-layout: fixed;
+}
+
+th {
+  height: 30px;
+}
+
+td {
+  height: 10px;
+}
+
+th, td {
+  text-align: left;
+  vertical-align: bottom;
+  border-bottom: 1px solid #ddd;
+  border-spacing: 50px;
 }
 
 .content-section {
