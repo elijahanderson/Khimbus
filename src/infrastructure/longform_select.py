@@ -9,6 +9,10 @@ def determine_longform_select(field):
     elif field == 'F':
         return [field, 'Female']
     # genderID
+    elif field == 'Ma':
+        return [field, 'Man']
+    elif field == 'Wo':
+        return [field, 'Woman']
     elif field == 'DA':
         return [field, 'Decline to answer']
     elif field == 'GV':
@@ -107,7 +111,7 @@ def determine_longform_select(field):
         return [field, 'Preschool']
     elif field == 'SC':
         return [field, 'Some College']
-    return 'N/A'
+    return field
 
 
 def determine_employment(field):
@@ -150,7 +154,7 @@ def determine_employment(field):
         return [field, 'Unknown (DUG)']
     elif field == '00':
         return [field, 'Not applicable due to age']
-    return 'N/A'
+    return field
 
 
 def determine_er_relationship(field):
@@ -235,7 +239,7 @@ def determine_er_relationship(field):
         return [field, 'Guardian']
     elif field == 'HHC':
         return [field, 'Home Health Coordinator']
-    return 'N/A'
+    return field
 
 
 def determine_guardian_type(field):
@@ -258,4 +262,4 @@ def determine_guardian_type(field):
         return [field, 'Community Advocate']
     elif field == '99':
         return [field, 'Other']
-    return 'N/A'
+    return field

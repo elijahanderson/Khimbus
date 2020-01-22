@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="main-header">
+        <h1>Update User {{ user.firstname }} {{ user.lastname }}</h1>
+        <br>
+        <h6>Click on the property you would like to update</h6>
+        <div>
+            <br>
+            <table>
+                <tr>
+                    <th><a class="header-btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'lastname'} }}">Last Name</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'firstname'} }}">First Name</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'job_title'} }}">Job Title</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'work_email'} }}">Work Email</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'phone'} }}">Phone</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'supervisor'} }}">Supervisor</a></th>
+                </tr>
+                <tr>
+                    <td><a class="btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'lastname'} }}">{{ user.lastname }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'firstname'} }}">{{ user.firstname }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'job_title'} }}">{{ user.job_title }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'work_email'} }}">{{ user.work_email }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'phone'} }}">{{ user.phone }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'supervisor'} }}">{{ user.supervisor }}</a></td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <h4>Facility Information</h4>
+            <br>
+            <br>
+            <h4>Current Direct Case Assignments</h4>
+            <br>
+            <br>
+            <h4>Workgroup Enrollments</h4>
+            <br>
+            <br>
+            <h4>Current Staff Supervising</h4>
+            <br>
+            <br>
+        </div>
+    </div>
+{% endblock content %}

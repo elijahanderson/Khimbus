@@ -1,198 +1,229 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="main-header">
-        <h1>{{ client.firstname }} {{ client.middlename }} {{ client.lastname }}</h1>
-        <br>
-        <h5>ID# {{ client.clientID }}</h5>
-        <br>
-        <h4>Identifying Info</h4>
-        <table>
-            <tr>
-                <th>Last Name</th>
-                <th>First Name</th>
-                <th>Middle Name</th>
-                <th>Name Suffix</th>
-                <th>Social Security Number</th>
-            </tr>
-            <tr>
-                <td>{{ client.lastname }}</td>
-                <td>{{ client.firstname }}</td>
-                <td>{{ client.middlename }}</td>
-                <td>{{ client.suffix }}</td>
-                <td>{{ client.ssn }}</td>
-            </tr>
-        </table>
-        <br>
-        <table>
-            <tr>
-                <th>Gender</th>
-                <th>Gender Identity</th>
-                <th>Sexual Orientation</th>
-                <th>Race</th>
-                <th>Ethnicity</th>
-            </tr>
-            <tr>
-                <td>{{ client.gender[1] }}</td>
-                <td>{{ client.genderID[1] }}</td>
-                <td>{{ client.sexual_orientation[1] }}</td>
-                <td>{{ client.race[1] }}</td>
-                <td>{{ client.ethnicity[1] }}</td>
-            </tr>
-        </table>
-        <br>
-        <br>
-        <h4>Address Information</h4>
-        <table>
-            <tr>
-                <th>Address Type</th>
-                <th>Street Address</th>
-                <th>City</th>
-                <th>State</th>
-                <th>ZIP Code</th>
-            </tr>
-            <tr>
-                <td>{{ client.addresses['0']['type'][1] }}</td>
-                <td>{{ client.addresses['0']['street_address'] }}</td>
-                <td>{{ client.addresses['0']['city'] }}</td>
-                <td>{{ client.addresses['0']['state'] }}</td>
-                <td>{{ client.addresses['0']['zip_code'] }}</td>
-            </tr>
-        </table>
-        <br>
-        <br>
-        <h4>Guardian Information</h4>
-        <table>
-            <tr>
-                <th>Guardian Name</th>
-                <th>Type</th>
-                <th>Guardian Phone</th>
-                <th>Phone</th>
-                <th>Effective Date</th>
-            </tr>
-            <tr>
-                <td>{{ client.guardian_info['0']['name'] }}</td>
-                <td>{{ client.guardian_info['0']['type'][1] }}</td>
-                <td>{{ client.guardian_info['0']['phone'] }}</td>
-            </tr>
-        </table>
-        <br>
-        <br>
-        <h4>Emergency Contact Info</h4>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Relationship To</th>
-                <th>Address</th>
-            </tr>
-            <tr>
-                <td>{{ client.emergency_contacts['0']['name'] }}</td>
-                <td>{{ client.emergency_contacts['0']['relationship'][1] }}</td>
-                <td>{{ client.emergency_contacts['0']['address'] }}</td>
-            </tr>
-        </table>
-        <br>
-        <table>
-            <tr>
-                <th>Phone</th>
-                <th>Email</th>
-                <th>Can Visit</th>
-                <th>Can Pick Up Client</th>
-            </tr>
-            <tr>
-                <td>{{ client.emergency_contacts['0']['phone'] }}</td>
-                <td>{{ client.emergency_contacts['0']['email'] }}</td>
-                <td>{{ client.emergency_contacts['0']['can_visit'] }}</td>
-                <td>{{ client.emergency_contacts['0']['can_pickup'] }}</td>
-            </tr>
-        </table>
-        <br>
-        <br>
-        <h4>Demographic Information</h4>
-        <table>
-            <tr>
-                <th>Age</th>
-                <th>Date of Birth</th>
-                <th>Intake Date</th>
-                <th>Discharge Date</th>
-                <th>Is Veteran</th>
-                <th>Veteran Status</th>
-            </tr>
-            <tr>
-                <td>{{ age }}</td>
-                <td>{{ client.dob }}</td>
-                <td>{{ client.intake_date }}</td>
-                <td>{{ client.discharge_date }}</td>
-                <td>{{ client.is_veteran }}</td>
-                <td>{{ client.veteran_status }}</td>
-            </tr>
-        </table>
-        <br>
-        <h5>Marital History</h5>
-        <table>
-            <tr>
-                <th>Status</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Reason for Separation</th>
-            </tr>
-            <tr>
-                <td>{{ client.marital_hist['status'][1] }}</td>
-                <td>{{ client.marital_hist['start_date'] }}</td>
-                <td>{{ client.marital_hist['end_date'] }}</td>
-                <td>{{ client.marital_hist['div_reason'] }}</td>
-            </tr>
-        </table>
-        <br>
-        <h5>Disabilities</h5>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Accommodations</th>
-            </tr>
-            <tr>
-                <td>{{ client.disabilities['0']['name'] }}</td>
-                <td>{{ client.disabilities['0']['descriptions'] }}</td>
-                <td>{{ client.disabilities['0']['accomodations'] }}</td>
-            </tr>
-        </table>
-        <br>
-        <br>
-        <h4>Employment/Education</h4>
-        <table>
-            <tr>
-                <th>Employment Status</th>
-                <th>Highest Education Level</th>
-                <th>Spoken Languages</th>
-                <th>Reading Languages</th>
-            </tr>
-            <tr>
-                <td>{{ client.employment_status[1] }}</td>
-                <td>{{ client.education_level[1] }}</td>
-                <td>{{ client.spoken_langs }}</td>
-                <td>{{ client.reading_langs }}</td>
-            </tr>
-        </table>
-        <br>
-        <br>
-        <h4>Contact Information</h4>
-        <table>
-            <tr>
-                <th>Home Phone</th>
-                <th>Cell Phone</th>
-                <th>Work Phone</th>
-                <th>Email</th>
-                <th>Preferred Method of Contact</th>
-            </tr>
-            <tr>
-                <td>{{ client.phone_home }}</td>
-                <td>{{ client.phone_cell }}</td>
-                <td>{{ client.phone_work }}</td>
-                <td>{{ client.email }}</td>
-                <td>{{ client.contact_pref }}</td>
-            </tr>
-        </table>
-        <br>
-        <br>
+        <div>
+            <h1>{{ client.firstname }} {{ client.middlename }} {{ client.lastname }} {{ client.suffix }}</h1>
+            <br>
+            {% if update_successful == 'True'%}
+            <h5>(Client successfully updated)</h5>
+            <br>
+            {% elif update_successful == 'False' %}
+            <h5>(Client could not be updated, likely due to a server issue -- please try again in a few moments)</h5>
+            <br>
+            {% endif %}
+            <a class="btn" href={{ delete_url }}
+               onclick="return confirm('Are you sure you want to delete this client?')">Delete Client</a>
+            <a class="btn" href={{ update_url }}>Edit Client</a>
+        </div>
+        <div>
+            <br>
+            <h5>ID# {{ client.clientID }}</h5>
+            <br>
+            <h4>Identifying Info</h4>
+            <table>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Middle Name</th>
+                    <th>Name Suffix</th>
+                    <th>Social Security Number</th>
+                    <th>Site Location</th>
+                </tr>
+                <tr>
+                    <td>{{ client.lastname }}</td>
+                    <td>{{ client.firstname }}</td>
+                    <td>{{ client.middlename }}</td>
+                    <td>{{ client.suffix }}</td>
+                    <td>{{ client.ssn }}</td>
+                    <td>{{ client.site_location }}</td>
+                </tr>
+            </table>
+            <br>
+            <table>
+                <tr>
+                    <th>Gender</th>
+                    <th>Gender Identity</th>
+                    <th>Sexual Orientation</th>
+                    <th>Race</th>
+                    <th>Ethnicity</th>
+                </tr>
+                <tr>
+                    <td>{{ client.gender[1] }}</td>
+                    <td>{{ client.genderID[1] }}</td>
+                    <td>{{ client.sexual_orientation[1] }}</td>
+                    <td>{{ client.race[1] }}</td>
+                    <td>{{ client.ethnicity[1] }}</td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <h4>Address Information</h4>
+            <table>
+                <tr>
+                    <th>Address Type</th>
+                    <th>Street Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>ZIP Code</th>
+                </tr>
+                <tr>
+                    <td>{{ client.addresses['0']['type'][1] }}</td>
+                    <td>{{ client.addresses['0']['street_address'] }}</td>
+                    <td>{{ client.addresses['0']['city'] }}</td>
+                    <td>{{ client.addresses['0']['state'] }}</td>
+                    <td>{{ client.addresses['0']['zip_code'] }}</td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <h4>Contact Information</h4>
+            <table>
+                <tr>
+                    <th>Home Phone</th>
+                    <th>Cell Phone</th>
+                    <th>Work Phone</th>
+                    <th>Email</th>
+                    <th>Preferred Method of Contact</th>
+                </tr>
+                <tr>
+                    <td>{{ client.phone_home }}</td>
+                    <td>{{ client.phone_cell }}</td>
+                    <td>{{ client.phone_work }}</td>
+                    <td>{{ client.email }}</td>
+                    <td>{{ client.contact_pref }}</td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <h4>Guardian Information</h4>
+            <table>
+                <tr>
+                    <th>Guardian Name</th>
+                    <th>Type</th>
+                    <th>Guardian Phone</th>
+                </tr>
+                <tr>
+                    <td>{{ client.guardian_info['0']['guardian_name'] }}</td>
+                    <td>{{ client.guardian_info['0']['guardian_type'][1] }}</td>
+                    <td>{{ client.guardian_info['0']['guardian_phone'] }}</td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <h4>Emergency Contact Info</h4>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Relationship To</th>
+                    <th>Address</th>
+                </tr>
+                <tr>
+                    <td>{{ client.emergency_contacts['0']['ER_name'] }}</td>
+                    <td>{{ client.emergency_contacts['0']['ER_relationship'][1] }}</td>
+                    <td>{{ client.emergency_contacts['0']['ER_address'] }}</td>
+                </tr>
+            </table>
+            <br>
+            <table>
+                <tr>
+                    <th>Phone</th>
+                    <th>Email</th>
+                    <th>Can Visit</th>
+                    <th>Can Pick Up Client</th>
+                </tr>
+                <tr>
+                    <td>{{ client.emergency_contacts['0']['ER_phone'] }}</td>
+                    <td>{{ client.emergency_contacts['0']['ER_email'] }}</td>
+                    <td>{{ client.emergency_contacts['0']['ER_can_visit'] }}</td>
+                    <td>{{ client.emergency_contacts['0']['ER_can_pickup'] }}</td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <h4>Demographic Information</h4>
+            <table>
+                <tr>
+                    <th>Age</th>
+                    <th>Date of Birth</th>
+                    <th>Intake Date</th>
+                    <th>Discharge Date</th>
+                    <th>Is Veteran</th>
+                    <th>Veteran Status</th>
+                </tr>
+                <tr>
+                    <td>{{ age }}</td>
+                    <td>{{ client.dob }}</td>
+                    <td>{{ client.intake_date }}</td>
+                    <td>{{ client.discharge_date }}</td>
+                    <td>{{ client.is_veteran }}</td>
+                    <td>{{ client.veteran_status }}</td>
+                </tr>
+            </table>
+            <br>
+            <h5>Marital History</h5>
+            <table>
+                <tr>
+                    <th>Status</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Reason for Separation</th>
+                </tr>
+                <tr>
+                    <td>{{ client.marital_hist['marital_status'][1] }}</td>
+                    <td>{{ client.marital_hist['marital_start_date'] }}</td>
+                    <td>{{ client.marital_hist['marital_end_date'] }}</td>
+                    <td>{{ client.marital_hist['div_reason'] }}</td>
+                </tr>
+            </table>
+            <br>
+            <h5>Disabilities</h5>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Accommodations</th>
+                </tr>
+                <tr>
+                    <td>{{ client.disabilities['0']['disability_name'] }}</td>
+                    <td>{{ client.disabilities['0']['disability_description'] }}</td>
+                    <td>{{ client.disabilities['0']['disability_accommodations'] }}</td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <h4>Employment/Education</h4>
+            <table>
+                <tr>
+                    <th>Employment Status</th>
+                    <th>Highest Education Level</th>
+                    <th>Spoken Languages</th>
+                    <th>Reading Languages</th>
+                </tr>
+                <tr>
+                    <td>{{ client.employment_status[1] }}</td>
+                    <td>{{ client.education_level[1] }}</td>
+                    <td>{{ client.spoken_langs }}</td>
+                    <td>{{ client.reading_langs }}</td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <h4>Medicaid Info</h4>
+            <table>
+                <tr>
+                    <th>Medicaid Number</th>
+                </tr>
+                <tr>
+                    <td>{{ client.medicaid['medicaid_number'] }}</td>
+                </tr>
+            </table>
+            <br>
+            <br>
+        </div>
+        <div>
+            <a class="btn" href={{ delete_url }}
+               onclick="return confirm('Are you sure you want to delete this client?')">Delete Client</a>
+            <a class="btn" href={{ update_url }}>Edit Client</a>
+        </div>
     </div>
 {% endblock content %}

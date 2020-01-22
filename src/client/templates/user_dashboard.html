@@ -1,14 +1,16 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="main-header">
-        <h1>List of Users</h1>
-        {% for user in users %}
-            <h4>{{ user.username }}</h4>
-        {% endfor %}
+        <h1>User Dashboard</h1>
         <br>
+        <h4>Users</h4>
+        <ul style="list-style-type:none;">
+            {% for user in users %}
+            <li><a class="btn" href={{ user_urls[loop.index-1] }}>{{ user.firstname }} {{ user.lastname }}</a></li>
+            {% endfor %}
+        </ul>
         <br>
         <h3>Search Users</h3>
-        <br>
         <br>
         {% for message in form.search_by.errors %}
         <div>{{ message }}</div>
@@ -17,6 +19,10 @@
         {% for message in form.search.errors %}
         <div>{{ message }}</div>
         {% endfor %}
+
+        {% if user_exists == 'False' %}
+        <h5>Server could not find user using search criteria.</h5>
+        {% endif %}
         <form method=POST action="{{ url_for('user_views.users') }}">
             <fieldset>
                 {{ form.hidden_tag() }}

@@ -1,6 +1,7 @@
 from mongoengine.queryset.visitor import Q
 
 from src.data.clients import Client
+from src.infrastructure.longform_select import determine_longform_select, determine_employment
 
 
 def add_client(clientID, firstname, lastname, middlename, suffix, gender, genderID, sexual_orientation, race, ethnicity,
@@ -80,3 +81,92 @@ def find_client_by_ID(clientID) -> Client:
 def find_all_clients():
     clients = Client.objects()
     return clients
+
+
+def repopulate_client(clientID, field_to_update, nvalue):
+    client = Client.objects(clientID=clientID).first()
+    print('Updating client...')
+    if field_to_update == 'lastname':
+        client.update(set__lastname=nvalue)
+    elif field_to_update == 'firstname':
+        client.update(set__firstname=nvalue)
+    elif field_to_update == 'middlename':
+        client.update(set__middlename=nvalue)
+    elif field_to_update == 'suffix':
+        client.update(set__suffix=nvalue)
+    elif field_to_update == 'ssn':
+        client.update(set__ssn=nvalue)
+    elif field_to_update == 'phone_home':
+        client.update(set__phone_home=nvalue)
+    elif field_to_update == 'phone_cell':
+        client.update(set__phone_cell=nvalue)
+    elif field_to_update == 'phone_work':
+        client.update(set__phone_work=nvalue)
+    elif field_to_update == 'email':
+        client.update(set__email=nvalue)
+    elif field_to_update == 'contact_pref':
+        client.update(set__contact_pref=nvalue)
+    elif field_to_update == 'veteran_status':
+        client.update(set__veteran_status=nvalue)
+    elif field_to_update == 'site_location':
+        client.update(set__site_location=nvalue)
+    elif field_to_update == 'gender':
+        gvalue = determine_longform_select(nvalue)
+        client.update(set__gender=gvalue)
+    elif field_to_update == 'genderID':
+        gvalue = determine_longform_select(nvalue)
+        client.update(set__genderID=gvalue)
+    elif field_to_update == 'sexual_orientation':
+        svalue = determine_longform_select(nvalue)
+        client.update(set__sexual_orientation=svalue)
+    elif field_to_update == 'race':
+        rvalue = determine_longform_select(nvalue)
+        client.update(set__race=rvalue)
+    elif field_to_update == 'ethnicity':
+        evalue = determine_longform_select(nvalue)
+        client.update(set__ethnicity=evalue)
+    elif field_to_update == 'education_level':
+        evalue = determine_longform_select(nvalue)
+        client.update(set__education_level=evalue)
+    elif field_to_update == 'employment_status':
+        evalue = determine_employment(nvalue)
+        client.update(set__employment_status=evalue)
+    elif field_to_update == 'spoken_langs':
+        client.update(set__spoken_langs=nvalue)
+    elif field_to_update == 'reading_langs':
+        client.update(set__reading_langs=nvalue)
+    elif field_to_update == 'dob':
+        client.update(set__dob=nvalue)
+    elif field_to_update == 'intake_date':
+        client.update(set__intake_date=nvalue)
+    elif field_to_update == 'discharge_date':
+        client.update(set__discharge_date=nvalue)
+    elif field_to_update == 'is_veteran':
+        client.update(set__is_veteran=nvalue)
+    elif field_to_update == 'addresses':
+        client.update(set__addresses=nvalue)
+    elif field_to_update == 'marital_hist':
+        client.update(set__marital_hist=nvalue)
+    elif field_to_update == 'guardian_info':
+        client.update(set__guardian_info=nvalue)
+    elif field_to_update == 'emergency_contacts':
+        client.update(set__emergency_contacts=nvalue)
+    elif field_to_update == 'disabilities':
+        client.update(set__disabilities=nvalue)
+    elif field_to_update == 'medicaid':
+        client.update(set__medicaid=nvalue)
+    else:
+        return False
+
+    client.reload()
+    return client
+
+
+def destroy_client(clientID):
+    print('Deleting...')
+    client = Client.objects(clientID=clientID).first()
+    if client:
+        client.delete()
+        print('Successfully deleted client!')
+        return True
+    return False

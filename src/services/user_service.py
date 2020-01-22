@@ -46,3 +46,35 @@ def find_user_by_email(email: str) -> User:
 def find_all_users():
     users = User.objects()
     return users
+
+
+def repopulate_user(username, field, nvalue):
+    user = User.objects(username=username).first()
+    print('Updating...')
+    if field == 'lastname':
+        user.update(set__lastname=nvalue)
+    elif field == 'firstname':
+        user.update(set__firstname=nvalue)
+    elif field == 'job_title':
+        user.update(set__job_title=nvalue)
+    elif field == 'work_email':
+        user.update(set__work_email=nvalue)
+    elif field == 'phone':
+        user.update(set__phone=nvalue)
+    elif field == 'supervisor':
+        user.update(set__supervisor=nvalue)
+    else:
+        return False
+
+    user.reload()
+    return user
+
+
+def destroy_user(username):
+    print('Deleting...')
+    user = User.objects(username=username).first()
+    if user:
+        user.delete()
+        print('Successfully deleted user!')
+        return True
+    return False

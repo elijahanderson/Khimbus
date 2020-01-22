@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import PasswordField, StringField, SubmitField, SelectField, validators
 
-# from src.services.user_service import find_all_users
+from src.infrastructure.user_helper import user_choices
 
 
 class RegistrationForm(FlaskForm):
@@ -20,18 +20,16 @@ class RegistrationForm(FlaskForm):
                                                          validators.email()])
     phone = StringField('Work phone: ', validators=[validators.optional(strip_whitespace=True),
                                                     validators.length(min=10, max=14)])
-    job_title = StringField('Job title: ', validators=[validators.required('Please enter job title'),
-                                                       validators.optional(strip_whitespace=True)])
+    job_title = SelectField('Job title: ', validators=[validators.required('Please enter job title')],
+                            choices=user_choices['job_title'])
 
     # users = find_all_users()
     user_list = []
     # for user in list(users):
     #     user_list.append(user.firstname + ' ' + user.lastname)
-    self_sup = (('Supervises Self'), ('Supervises Self'))
-    user_list.append(self_sup)
 
     supervisor = SelectField('Supervisor: ',
                              validators=[validators.required('Please select supervisor or self supervised')],
-                             choices=user_list)
+                             choices=user_choices['supervisor'])
     confirm = PasswordField('Re-enter password: ')
     submit = SubmitField('Submit')

@@ -1,17 +1,24 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="main-header">
-      <h1>Log In</h1>
-      <br>
-      {% for message in form.username.errors %}
-         <div>{{ message }}</div>
-      {% endfor %}
+        <h1>Log In</h1>
+        <br>
+        {% for message in form.username.errors %}
+        <div>{{ message }}</div>
+        {% endfor %}
 
-      {% for message in form.password.errors %}
-         <div>{{ message }}</div>
-      {% endfor %}
+        {% for message in form.password.errors %}
+        <div>{{ message }}</div>
+        {% endfor %}
 
-         <form method=POST action="{{ url_for('user_views.login') }}">
+        {% if user_found == 'False' %}
+        <h5>Username could not be found in server.</h5>
+        {% endif %}
+        {% if pass_success == 'False' %}
+        <h5>Password is incorrect.</h5>
+        {% endif %}
+
+        <form method=POST action="{{ url_for('user_views.login') }}">
             <fieldset>
                 {{ form.hidden_tag() }}
                 <div>
@@ -26,6 +33,6 @@
                     {{ form.submit }}
                 </div>
             </fieldset>
-         </form>
+        </form>
     </div>
 {% endblock content %}

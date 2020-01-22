@@ -1,6 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, DateTimeField, SelectField, BooleanField, SelectMultipleField, validators
+from wtforms import StringField, SubmitField, IntegerField, DateTimeField, SelectField, BooleanField, \
+    SelectMultipleField, validators
 from wtforms.fields.html5 import DateField
+
+from src.infrastructure.client_helper import client_choices
 
 
 class ClientRegistration(FlaskForm):
@@ -19,47 +22,21 @@ class ClientRegistration(FlaskForm):
                                                                      validators.optional(strip_whitespace=True)])
     gender = SelectField('Gender (M/F)*: ',
                          validators=[validators.required("Please select either 'M' for male or 'F' for female")],
-                         choices=[('', 'Select'),
-                                  ('M', 'Male'),
-                                  ('F', 'Female')])
-    genderID = SelectField('Gender ID: ', choices=[('', 'Select'),
-                                                   ('DA', 'Decline to answer'),
-                                                   ('GV', 'Gender Variant'),
-                                                   ('GQ', 'Intersex'),
-                                                   ('M', 'Man'),
-                                                   ('F', 'Woman'),
-                                                   ('Ques', 'Questioning'),
-                                                   ('Trans', 'Transgender'),
-                                                   ('N/A', 'Not applicable due to age (0-17)')])
-    sexual_orientation = SelectField('Sexual Orientation: ', choices=[('', 'Select'),
-                                                                      ('Asex', 'Asexual'),
-                                                                      ('BI', 'Bisexual'),
-                                                                      ('DA', 'Decline to answer'),
-                                                                      ('HS', 'Gay'),
-                                                                      ('SH', 'Heterosexual'),
-                                                                      ('Les', 'Lesbian'),
-                                                                      ('Ques', 'Questioning'),
-                                                                      ('N/A', 'Not applicable due to age (0-17)')])
+                         choices=client_choices['gender'])
+    genderID = SelectField('Gender ID: ', choices=client_choices['genderID'])
+    sexual_orientation = SelectField('Sexual Orientation: ', choices=client_choices['sexual_orientation'])
     race = SelectField('Race*: ', validators=[validators.required('Please select race')],
-                                 choices=[('', 'Select'),
-                                          ('NA', 'Native American'),
-                                          ('AP', 'Asian or Pacific Islander'),
-                                          ('B', 'Black'),
-                                          ('NH', 'Native Hawaiian'),
-                                          ('IN', 'Indian or other Subcontinent Asian'),
-                                          ('W', 'White'),
-                                          ('OU', 'Other/Unknown')])
-    ethnicity = SelectField('Ethnicity: ', choices=[('', 'Select'),
-                                                    ('01', 'Hispanic or Latino'),
-                                                    ('02', 'Non Hispanic or Latino')])
+                       choices=client_choices['race'])
+    ethnicity = SelectField('Ethnicity: ', choices=client_choices['ethnicity'])
 
     ssn = StringField('Social Security # (No dashes, only numbers)*: ', validators=[validators.
                       required('Please enter a valid SSN'),
-                                                            validators.optional(strip_whitespace=True),
-                                                            validators.length(min=9, max=11)])
+                                                                                    validators.
+                      optional(strip_whitespace=True),
+                                                                                    validators.length(min=9, max=11)])
     site_location = StringField('Client site location*: ', validators=[validators.
                                 required('Please enter valid site location'),
-                                                                      validators.optional(strip_whitespace=True)])
+                                                                       validators.optional(strip_whitespace=True)])
     # medicaid info -- { medicaid_number: int, effective_date: dt, expiration_date: dt }
     medicaid_number = StringField('Medicaid #: ', validators=[validators.optional(strip_whitespace=True),
                                                               validators.length(min=12, max=14)])
@@ -78,24 +55,13 @@ class ClientRegistration(FlaskForm):
                                                            validators.optional(strip_whitespace=True)])
     email = StringField('Client email: ', validators=[validators.email(),
                                                       validators.optional(strip_whitespace=True)])
-    contact_pref = SelectField('Contact preference: ', choices=[('', 'Select'),
-                                                                ('Home', 'By home phone'),
-                                                                ('Cell', 'By cell phone'),
-                                                                ('Work', 'By work phone'),
-                                                                ('Email', 'By email')])
+    contact_pref = SelectField('Contact preference: ', choices=client_choices['contact_pref'])
 
     # Address Info -- { address1: {type: (str: home, mother, father, etc.), street_adr: str, city: str, state: str,
     #                          ZIP: int }, {address2: etc.. }}
     address_type = SelectField('Address type*: ',
                                validators=[validators.required('Please specify address type')],
-                               choices=[('', 'Select'),
-                                        ('Perm', 'Permanent Residence'),
-                                        ('Rel', 'Relative\'s Home'),
-                                        ('Temp', 'Temporary Residence'),
-                                        ('Friend', 'Friend\'s Home'),
-                                        ('HL', 'Homeless'),
-                                        ('Office', 'Office'),
-                                        ('OU', 'Other/Unknown')])
+                               choices=client_choices['type'])
     street_address = StringField('Street Address*: ', validators=[validators.
                                  required('Please enter valid street address'),
                                                                   validators.optional(strip_whitespace=True),
@@ -111,15 +77,7 @@ class ClientRegistration(FlaskForm):
     # guardian info -- { person1: {name: str, type: int (codes), effective_date: dt, enddate: dt, phone: int}}
     guardian_name = StringField('Guardian name: ', validators=[validators.optional(strip_whitespace=True),
                                                                validators.length(min=3, max=50)])
-    guardian_type = SelectField('Guardian type: ', choices=[('', 'Select'),
-                                                            ('01', 'Parent'),
-                                                            ('02', 'Relative'),
-                                                            ('03', 'State Custody or Commissioner'),
-                                                            ('04', 'Temporary'),
-                                                            ('05', 'Protective'),
-                                                            ('06', 'Emergency'),
-                                                            ('10', 'Community Advocate'),
-                                                            ('99', 'Other')])
+    guardian_type = SelectField('Guardian type: ', choices=client_choices['guardian_type'])
     guardian_phone = StringField('Guardian phone #: ', validators=[validators.optional(strip_whitespace=True),
                                                                    validators.length(min=10, max=14),
                                                                    validators.optional(strip_whitespace=True)])
@@ -130,46 +88,7 @@ class ClientRegistration(FlaskForm):
                                                                    validators.optional(strip_whitespace=True),
                                                                    validators.length(min=3, max=50)])
     ER_relationship = SelectField('Relationship to emergency contact: ',
-                                  choices=[('', 'Select'),
-                                           ('01', 'Punitive Father'),
-                                            ('04', 'Mother'),
-                                            ('05', 'Father'),
-                                            ('06', 'Son'),
-                                            ('07', 'Daughter'),
-                                            ('08', 'Brother'),
-                                            ('09', 'Sister'),
-                                            ('10', 'Husband'),
-                                            ('11', 'Wife'),
-                                            ('12', 'Step Father'),
-                                            ('13', 'Step Mother'),
-                                            ('14', 'Step Sister'),
-                                            ('15', 'Step Brother'),
-                                            ('16', 'Aunt'),
-                                            ('17', 'Uncle'),
-                                            ('18', 'Cousin'),
-                                            ('19', 'Niece'),
-                                            ('20', 'Nephew'),
-                                            ('21', 'Grand Mother'),
-                                            ('22', 'Grand Father'),
-                                            ('23', 'Grandson'),
-                                            ('24', 'Granddaughter'),
-                                            ('25', 'County Case Worker'),
-                                            ('26', 'Babysitter'),
-                                            ('27', 'Probation Officer'),
-                                            ('28', 'Neighbor'),
-                                            ('29', 'Friend'),
-                                            ('30', 'Community Advocate'),
-                                            ('31', 'Lawyer'),
-                                            ('32', 'Mentor'),
-                                            ('33', 'Reference for an Applicant'),
-                                            ('34', 'Physician'),
-                                            ('37', 'Adopted Child'),
-                                            ('38', 'Dentist'),
-                                            ('39', 'MH Practitioner'),
-                                            ('43', 'Single Point Fixed Responsibility (SPFR)'),
-                                            ('44', 'Other'),
-                                            ('52', 'Guardian'),
-                                            ('HHC', 'Home Health Coordinator')])
+                                  choices=client_choices['ER_relationship'])
     ER_phone = StringField('Emergency contact phone no.*: ', validators=[validators.
                            required('Please enter valid phone number'),
                                                                          validators.optional(strip_whitespace=True),
@@ -190,89 +109,35 @@ class ClientRegistration(FlaskForm):
     is_veteran = BooleanField('Is client a veteran?: ')
     veteran_status = SelectField('What is the veteran status of the client?: ', validators=[validators.
                                  optional(strip_whitespace=True)],
-                                 choices=[('', 'Select'),
-                                          ('Administratively Discharged', 'Administratively Discharged'),
-                                          ('Punitively Discharged', 'Punitively Discharged'),
-                                          ('Medically Retired', 'Medically Retired'),
-                                          ('Career Veteran', 'Career Veteran'),
-                                          ('Army', 'Army'),
-                                          ('Navy/Marines/Coast Guard', 'Navy/Marines/Coast Guard'),
-                                          ('Air Force', 'Air Force')])
+                                 choices=client_choices['veteran_status'])
     # marital history -- {status: str (single, etc.), start_date: dt, end_date: dt, div_reason: str}
     marital_status = SelectField('Marital status*: ',
                                  validators=[validators.required('Please select marital status')],
-                                 choices=[('', 'Select'),
-                                          ('Sin', 'Single'),
-                                          ('Mar', 'Married'),
-                                          ('Div', 'Divorced'),
-                                          ('Wid', 'Widowed'),
-                                          ('Sep', 'Separated'),
-                                          ('DP', 'Domestic Partner'),
-                                          ('RDP', 'Registered Domestic Partner'),
-                                          ('OU', 'Other/Unknown')])
+                                 choices=client_choices['marital_status'])
     # marriage_start = DateField('Marriage start date: ')
     # marriage_end = DateField('Marriage end date: ')
     div_reason = StringField('Reason for separation: ', validators=[validators.optional(strip_whitespace=True)])
 
     # disabilities -- {disability1: {name: str, description: str, accomodations: str }}
     disability = StringField('Enter client disability(ies): ', validators=[validators.optional(strip_whitespace=True)])
-    disability_desc = StringField('Description of disability: ', validators=[validators.optional(strip_whitespace=True)])
-    accomodations = StringField('Accomodations for disability: ', validators=[validators.optional(strip_whitespace=True)])
+    disability_desc = StringField('Description of disability: ',
+                                  validators=[validators.optional(strip_whitespace=True)])
+    accommodations = StringField('Accommodations for disability: ',
+                                 validators=[validators.optional(strip_whitespace=True)])
 
     # employment & education
     employment_status = SelectField('Select employment status: ',
                                     validators=[validators.required('Please select employment status of client')],
-                                    choices=[('', 'Select'),
-                                             ('01', 'Volunteer'),
-                                             ('02', 'Part Time Student'),
-                                             ('03', 'Work Adjustment Training'),
-                                             ('04', 'Unemployed - seeking'),
-                                             ('05', 'Unemployed - not seeking'),
-                                             ('06', 'Transitional Employment Placement'),
-                                             ('07', 'Homemaker'),
-                                             ('09', 'Retired'),
-                                             ('10', 'Disabled'),
-                                             ('11', 'Inmate of Institution'),
-                                             ('17', 'Unpaid Rehabiliational Activity (DUG)'),
-                                             ('20', 'Full Time Student (DUG)'),
-                                             ('24', 'Employed Full Time (DUG)'),
-                                             ('25', 'Employed Part Time (DUG)'),
-                                             ('28', 'Other Employment (DUG)'),
-                                             ('29', 'Inactive in the community (DUG)'),
-                                             ('99', 'Unknown (DUG)'),
-                                             ('00', 'Not applicable due to age')])
+                                    choices=client_choices['employment_status'])
     education_level = SelectField('Select highest education level: ',
                                   validators=[validators.required('Please enter highest education level')],
-                                  choices=[('', 'Select'),
-                                           ('AD', 'Associates Degree'),
-                                           ('BD', 'Bachelors Degree'),
-                                           ('DPG', 'Doctoral or Postgraduate'),
-                                           ('ECE', 'Early Childhood Education'),
-                                           ('HSGED', 'High School Graduate/GED'),
-                                           ('Kin', 'Kindergarden'),
-                                           ('Mas', 'Masters Degree'),
-                                           ('NGC', 'No Grades Completed'),
-                                           ('Pre', 'Preschool'),
-                                           ('SC', 'Some College')])
+                                  choices=client_choices['education_level'])
     spoken_langs = SelectMultipleField('Select all spoken languages (Press CTRL & click to select multiple)*: ',
                                        validators=[validators.required('Please select any number of spoken languages')],
-                                       choices=[('', 'Select'),
-                                                ('Apache', 'Apache'),
-                                                ('English', 'English'),
-                                                ('Navajo', 'Navajo'),
-                                                ('Other Native American', 'Other Native American'),
-                                                ('Other/Unknown', 'Other/Unknown'),
-                                                ('Sign Language', 'Sign Language'),
-                                                ('Spanish', 'Spanish')])
+                                       choices=client_choices['spoken_langs'])
     reading_langs = SelectMultipleField('Select all reading languages (Press CTRL & click to select multiple)*: ',
-                                        validators=[validators.required('Please select any number of reading languages')],
-                                        choices=[('', 'Select'),
-                                                 ('Apache', 'Apache'),
-                                                 ('English', 'English'),
-                                                 ('Navajo', 'Navajo'),
-                                                 ('Other Native American', 'Other Native American'),
-                                                 ('Other/Unknown', 'Other/Unknown'),
-                                                 ('Sign Language', 'Sign Language'),
-                                                 ('Spanish', 'Spanish')])
+                                        validators=[
+                                            validators.required('Please select any number of reading languages')],
+                                        choices=client_choices['reading_langs'])
 
     submit = SubmitField('Submit')

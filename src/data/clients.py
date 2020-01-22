@@ -1,5 +1,6 @@
 import mongoengine as me
 
+
 class Client(me.Document):
     """
     Class used to represent a client.

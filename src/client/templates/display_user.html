@@ -1,38 +1,64 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="main-header">
-        <h1>{{ user.firstname }} {{ user.lastname }}</h1>
-        <br>
-        <h4>Contact Information</h4>
-        <table>
-            <tr>
-                <th>Username</th>
-                <th>Job Title</th>
-                <th>Work Email</th>
-                <th>Phone</th>
-                <th>Supervisor</th>
-            </tr>
-            <tr>
-                <td>{{ user.username }}</td>
-                <td>{{ user.job_title }}</td>
-                <td>{{ user.work_email }}</td>
-                <td>{{ user.phone }}</td>
-                <td>{{ user.supervisor }}</td>
-            </tr>
-        </table>
-        <br>
-        <br>
-        <h4>Facility Information</h4>
-        <br>
-        <br>
-        <h4>Current Direct Case Assignments</h4>
-        <br>
-        <br>
-        <h4>Workgroup Enrollments</h4>
-        <br>
-        <br>
-        <h4>Current Staff Supervising</h4>
-        <br>
-        <br>
+        <div>
+            <h1>{{ user.firstname }} {{ user.lastname }}</h1>
+            <br>
+            {% if update_success == 'True'%}
+            <h5>(User successfully updated)</h5>
+            <br>
+            {% elif update_success == 'False' %}
+            <h5>(User could not be updated, likely due to a server issue -- please try again in a few moments)</h5>
+            <br>
+            {% elif delete_success == 'False-Server' %}
+            <h5>(User could not be deleted, likely due to a server issue -- please try again in a few moments)</h5>
+            <br>
+            {% elif delete_success == 'False-Admin' %}
+            <h5>(You do not have permission to delete this user)</h5>
+            <br>
+            {% endif %}
+            <a class="btn" href={{ delete_url }}
+               onclick="return confirm('Are you sure you want to delete this user?')">Delete User</a>
+            <a class="btn" href={{ update_url }}>Edit User</a>
+        </div>
+        <div>
+            <br>
+            <h4>Contact Information</h4>
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Job Title</th>
+                    <th>Work Email</th>
+                    <th>Phone</th>
+                    <th>Supervisor</th>
+                </tr>
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.job_title }}</td>
+                    <td>{{ user.work_email }}</td>
+                    <td>{{ user.phone }}</td>
+                    <td>{{ user.supervisor }}</td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <h4>Facility Information</h4>
+            <br>
+            <br>
+            <h4>Current Direct Case Assignments</h4>
+            <br>
+            <br>
+            <h4>Workgroup Enrollments</h4>
+            <br>
+            <br>
+            <h4>Current Staff Supervising</h4>
+            <br>
+            <br>
+        </div>
+        <div>
+            <a class="btn" href={{ delete_url }}
+               onclick="return confirm('Are you sure you want to delete this user?')">Delete User</a>
+            <a class="btn" href={{ update_url }}>Edit User</a>
+        </div>
     </div>
 {% endblock content %}

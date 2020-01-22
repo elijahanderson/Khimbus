@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="main-header">
+        <br>
         <h1>Client Information</h1>
         <br>
         {% for message in form.search_by.errors %}
@@ -10,6 +11,10 @@
         {% for message in form.search.errors %}
         <div>{{ message }}</div>
         {% endfor %}
+
+        {% if client_exists == 'False' %}
+        <h5>Server could not find client using search criteria.</h5>
+        {% endif %}
 
         <form method=POST action="{{ url_for('client_views.client_info') }}">
             <fieldset>

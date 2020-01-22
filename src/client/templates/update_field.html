@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="main-header">
+        <h1>Update Client</h1>
+        <br>
+        {% for message in form.cvalue.errors %}
+        <div>{{ message }}</div>
+        {% endfor %}
+
+        {% for message in form.nvalue.errors %}
+        <div>{{ message }}</div>
+        {% endfor %}
+
+        <form method=POST action={{ form_url }}>
+            <fieldset>
+                {{ form.hidden_tag() }}
+                <div>
+                    {{ form.cvalue.label }}
+                    {{ form.cvalue }}
+                    <br>
+                    <br>
+                    {{ form.nvalue.label }}
+                    {{ form.nvalue }}
+                    <br>
+                    <br>
+                    {{ form.update }}
+                </div>
+            </fieldset>
+        </form>
+    </div>
+{% endblock content %}

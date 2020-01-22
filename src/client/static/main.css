@@ -56,6 +56,29 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 100px;
 }
 
+.main-header a:hover {
+  color: #cbd5db;
+}
+
+.main-header .header-btn {
+  color: #444444;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.main-header .header-btn:hover {
+  color: #cbd5db;
+}
+
+.main-header .dict-btn {
+  color: #444444;
+  text-decoration: none;
+}
+
+.main-header .dict-btn:hover {
+  color: #cbd5db
+}
+
 .client-header {
   position: relative;
   text-align: left;

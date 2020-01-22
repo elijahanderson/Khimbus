@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="main-header">
-      <h2 style = "text-align: center;">Client Registration</h2>
+      <h1>Client Registration</h1>
 
       {% for message in form.clientID.errors %}
          <div>{{ message }}</div>
@@ -171,7 +171,7 @@
          <div>{{ message }}</div>
       {% endfor %}
 
-      {% for message in form.accomodations.errors %}
+      {% for message in form.accommodations.errors %}
          <div>{{ message }}</div>
       {% endfor %}
 
@@ -195,6 +195,7 @@
             <fieldset>
                 {{ form.hidden_tag() }}
                 <div>
+                    <br>
                     <h4>Names & Identifying Info</h4>
                     <br>
                     {{ form.clientID.label }}
@@ -379,8 +380,8 @@
                     {{ form.disability_desc }}
                     <br>
                     <br>
-                    {{ form.accomodations.label }}
-                    {{ form.accomodations }}
+                    {{ form.accommodations.label }}
+                    {{ form.accommodations }}
                     <br>
                     <br>
                     <h4>Employment & Education</h4>
