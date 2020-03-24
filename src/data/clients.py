@@ -12,17 +12,20 @@ class Client(me.Document):
     program_ids: list of IDs of the programs the client is registered in -- weak relationship to the programs collection
     """
     # names / identifying info
-    clientID = me.StringField(required=False)
+    clientID = me.IntField(required=True)
+    other_id_no = me.IntField(required=False)
     firstname = me.StringField(required=True)
     lastname = me.StringField(required=True)
     middlename = me.StringField(required=False)
     suffix = me.StringField(required=False)
-    gender = me.ListField(required=True)
+    gender = me.StringField(required=True)
+    gender_code = me.StringField(required=True)
     genderID = me.ListField(required=False)
     sexual_orientation = me.ListField(required=False)
     race = me.ListField(required=True)  # required, but can decline to provide
     ethnicity = me.ListField(required=False)
     ssn = me.IntField(required=True)
+    driver_license_number = me.StringField(required=False)
     site_location = me.StringField(required=True)
     # medicaid info -- { medicaid_number: int, effective_date: dt, expiration_date: dt }
     medicaid = me.DictField(required=False)
@@ -33,8 +36,8 @@ class Client(me.Document):
     phone_work = me.StringField(required=False)
     email = me.StringField(required=True)
     contact_pref = me.StringField(required=False)
-    # address info -- { address1: {type: (str: home, mother, father, etc.), street_adr: str, city: str, state: str, date: dt,
-    #                          ZIP: int }, {address2: etc.. }}
+    # address info -- { address1: {type: (str: home, mother, father, etc.), street_adr: str, city: str, state: str,
+    #                              date: dt, ZIP: int }, {address2: etc.. }}
     addresses = me.DictField(required=True)
 
     # guardian info -- { person1: {name: str, type: int (codes), effective_date: dt, enddate: dt, phone: int}}

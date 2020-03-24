@@ -4,23 +4,26 @@ from src.data.clients import Client
 from src.infrastructure.longform_select import determine_longform_select, determine_employment
 
 
-def add_client(clientID, firstname, lastname, middlename, suffix, gender, genderID, sexual_orientation, race, ethnicity,
-               ssn, site_location, medicaid, phone_home, phone_cell, phone_work, email, contact_pref,
+def add_client(clientID, firstname, lastname, middlename, suffix, gender, gender_code, genderID, sexual_orientation,
+               race, ethnicity, ssn, dln, site_location, medicaid, phone_home, phone_cell, phone_work, email, contact_pref,
                addresses, guardian_info, emergency_contacts, dob, intake_date, discharge_date, is_veteran,
                veteran_status, marital_hist, disabilities, employment_status, education_level, spoken_langs,
                reading_langs):
     client = Client()
     client.clientID = clientID
+    client.other_id_no = clientID
     client.firstname = firstname
     client.lastname = lastname
     client.middlename = middlename
     client.suffix = suffix
     client.gender = gender
+    client.gender_code = gender_code
     client.genderID = genderID
     client.sexual_orientation = sexual_orientation
     client.race = race
     client.ethnicity = ethnicity
     client.ssn = ssn
+    client.driver_license_number = dln
     client.site_location = site_location
     client.medicaid = medicaid
     client.phone_home = phone_home
@@ -42,7 +45,7 @@ def add_client(clientID, firstname, lastname, middlename, suffix, gender, gender
     client.education_level = education_level
     client.spoken_langs = spoken_langs
     client.reading_langs = reading_langs
-    client.save(validate=False)
+    client.save(validate=False)  # validation in front-end
     print('New client saved!')
     return client
 
@@ -73,9 +76,11 @@ def find_client_by_email(email) -> Client:
     return client
 
 
-def find_client_by_ID(clientID) -> Client:
-    client = Client.objects(clientID=clientID).first()
-    return client
+def find_client_by_ID(id_no) -> Client:
+    client = Client.objects(clientID=id_no).first()
+    if client:
+        return client
+    return Client.objects(other_id_no=id_no).first()
 
 
 def find_all_clients():
@@ -112,7 +117,8 @@ def repopulate_client(clientID, field_to_update, nvalue):
         client.update(set__site_location=nvalue)
     elif field_to_update == 'gender':
         gvalue = determine_longform_select(nvalue)
-        client.update(set__gender=gvalue)
+        client.update(set__gender=gvalue[1])
+        client.update(set__gender_code=gvalue[0])
     elif field_to_update == 'genderID':
         gvalue = determine_longform_select(nvalue)
         client.update(set__genderID=gvalue)
@@ -155,6 +161,8 @@ def repopulate_client(clientID, field_to_update, nvalue):
         client.update(set__disabilities=nvalue)
     elif field_to_update == 'medicaid':
         client.update(set__medicaid=nvalue)
+    elif field_to_update == 'driver_license_number':
+        client.update(set__driver_license_number=nvalue)
     else:
         return False
 

@@ -14,6 +14,12 @@
 
         {% if client_exists == 'False' %}
         <h5>Server could not find client using search criteria.</h5>
+        <br>
+        {% endif %}
+
+        {% if value_error == 'True' %}
+        <h5>ID search criteria must be a positive integer.</h5>
+        <br>
         {% endif %}
 
         <form method=POST action="{{ url_for('client_views.client_info') }}">

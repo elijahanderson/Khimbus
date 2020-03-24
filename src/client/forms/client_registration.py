@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, IntegerField, DateTimeField, SelectField, BooleanField, \
+from wtforms import StringField, SubmitField, IntegerField, SelectField, BooleanField, \
     SelectMultipleField, validators
 from wtforms.fields.html5 import DateField
 
@@ -8,8 +8,10 @@ from src.infrastructure.client_helper import client_choices
 
 class ClientRegistration(FlaskForm):
     # names / identifying info
-    clientID = StringField('MyEvolve Client ID (if applicable): ', validators=[validators.
-                           optional(strip_whitespace=True)])
+    clientID = IntegerField('MyEvolve Client ID: ', validators=[validators.required('Please enter valid ID number'),
+                                                                validators.
+                            optional(strip_whitespace=True),
+                                                                validators.number_range(min=0, max=999999)])
     firstname = StringField('First name*: ', validators=[validators.required('Please enter valid first name'),
                                                          validators.length(min=2, max=50),
                                                          validators.optional(strip_whitespace=True)])
@@ -34,6 +36,8 @@ class ClientRegistration(FlaskForm):
                                                                                     validators.
                       optional(strip_whitespace=True),
                                                                                     validators.length(min=9, max=11)])
+    dln = StringField('Driver License Number: ', validators=[validators.length(min=10, max=12),
+                                                             validators.optional(strip_whitespace=True)])
     site_location = StringField('Client site location*: ', validators=[validators.
                                 required('Please enter valid site location'),
                                                                        validators.optional(strip_whitespace=True)])

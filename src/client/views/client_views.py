@@ -33,7 +33,7 @@ def client_dashboard():
     clients = find_all_clients()
     client_urls = []
     for client in clients:
-        client_urls.append('/client/' + client.clientID)
+        client_urls.append('/client/' + str(client.clientID))
     return render_template('client_dashboard.html',
                            href_var=href,
                            title='Client Dashboard',
@@ -104,8 +104,8 @@ def display_client(clientID):
         href = '/user/' + session['username']
     client = find_client_by_ID(clientID)
     if client:
-        delete_url = '/delete-client/' + clientID
-        update_url = '/update-client/' + clientID
+        delete_url = '/delete-client/' + str(clientID)
+        update_url = '/update-client/' + str(clientID)
         return render_template('display_client.html', client=client, title=client.firstname, sidebar_header='Client',
                                href_var=href, links=links, delete_url=delete_url, update_url=update_url)
     return redirect(url_for('client_views.client_info'))
@@ -152,8 +152,12 @@ def client_info():
                 else:
                     return render_template('client_info.html', title='Error', href_var=href,
                                            sidebar_header='Client', links=links, form=form, client_exists='False')
-            elif search_by == 'MyEvolve ID':
-                client = find_client_by_ID(criteria)
+            elif search_by == 'MyEvolve ID' or search_by == 'Other ID':
+                try:
+                    client = find_client_by_ID(criteria)
+                except ValueError:
+                    return render_template('client_info.html', title='Error', href_var=href, sidebar_header='Client',
+                                           links=links, form=form, value_error='True')
                 if client:
                     return redirect(url_for('client_views.display_client', clientID=client.clientID))
                 else:
@@ -179,13 +183,9 @@ def create_client():
         if form.validate_on_submit() or environ.get('TEST_FLAG') == 'true':
             name = form.firstname.data + ' ' + form.lastname.data
             print('Creating client', name, '...')
-            ssn = form.ssn.data.replace('-', '')
-            client_exists = find_client_by_ssn(ssn)
-            if isinstance(client_exists, str):  # for testing purposes
-                if client_exists == ssn:
-                    return render_template('error_client_exists.html', title='Error')
-                pass
-            elif client_exists:
+            clientID = form.clientID.data
+            client_exists = find_client_by_ID(clientID)
+            if client_exists:
                 return render_template('error_client_exists.html', title='Error')
 
             gender = determine_longform_select(form.gender.data)
@@ -224,15 +224,24 @@ def create_client():
                                   'disability_accommodations': form.accommodations.data}}
 
             add_client(form.clientID.data, form.firstname.data, form.lastname.data, form.middlename.data,
-                       form.suffix.data, gender, genderID, sexual_orientation, race, ethnicity, ssn,
-                       form.site_location.data, medicaid, form.phone_home.data, form.phone_cell.data,
+                       form.suffix.data, gender[1], gender[0], genderID, sexual_orientation, race, ethnicity,
+                       form.ssn.data, form.dln.data, form.site_location.data, medicaid, form.phone_home.data, form.phone_cell.data,
                        form.phone_work.data, form.email.data, form.contact_pref.data, addresses, guardian_info,
                        emergency_contacts, form.dob.data, form.intake_date.data, form.discharge_date.data,
                        form.is_veteran.data, form.veteran_status.data, marital_hist, disabilities, employment_status,
                        education_level, form.spoken_langs.data, form.reading_langs.data)
 
-            return render_template('registration_success.html', title='Register', href_var=href,
-                                   sidebar_header='Client', links=links)
+            client = find_client_by_ID(form.clientID.data)
+            if client:
+                delete_url = '/delete-client/' + str(client.clientID)
+                update_url = '/update-client/' + str(client.clientID)
+                return render_template('display_client.html', client=client, title=client.firstname,
+                                       sidebar_header='Client', href_var=href, links=links, delete_url=delete_url,
+                                       update_url=update_url)
+            else:
+                return render_template('client_client.html', form=form, title='Register Client', href_var=href,
+                                       sidebar_header='Client', links=links, success='False')
+
         else:
             flash('Enter the required fields.')
             return render_template('create_client.html', form=form, title='Register Client', href_var=href,
@@ -381,14 +390,14 @@ def repopulate_client_helper(clientID, field_to_update, nvalue):
     href = ''
     if 'username' in session:
         href = '/user/' + session['username']
-    delete_url = '/delete-client/' + clientID
-    update_url = '/update-client/' + clientID
+    delete_url = '/delete-client/' + str(clientID)
+    update_url = '/update-client/' + str(clientID)
     updated_client = repopulate_client(clientID, field_to_update, nvalue)
     if updated_client:
         return render_template('display_client.html', client=updated_client, title=updated_client.firstname,
                                sidebar_header='Client', href_var=href, links=links, delete_url=delete_url,
                                update_url=update_url, update_successful='True')
     client = find_client_by_ID(clientID)
-    return render_template('display_client.html', client=client, title=updated_client.firstname,
+    return render_template('display_client.html', client=client, title=client.firstname,
                            sidebar_header='Client', href_var=href, links=links, delete_url=delete_url,
                            update_url=update_url, update_successful='False')

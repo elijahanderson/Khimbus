@@ -6,9 +6,10 @@ class ClientSearchForm(FlaskForm):
     choices = [('Name', 'Name'),
                ('SSN', 'SSN'),
                ('MyEvolve ID', 'MyEvolve ID'),
+               ('Other ID', 'Other ID'),
                ('Medicaid Number', 'Medicaid Number'),
                ('Phone Number', 'Phone Number'),
                ('Email', 'Email')]
     search_by = SelectField('Search by: ', validators=[validators.required('Please select search category')],
-                                           choices=choices)
+                            choices=choices)
     search = StringField('', validators=[validators.optional(strip_whitespace=True)])

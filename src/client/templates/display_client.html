@@ -27,7 +27,7 @@
                     <th>Middle Name</th>
                     <th>Name Suffix</th>
                     <th>Social Security Number</th>
-                    <th>Site Location</th>
+                    <th>Driver License Number</th>
                 </tr>
                 <tr>
                     <td>{{ client.lastname }}</td>
@@ -35,7 +35,7 @@
                     <td>{{ client.middlename }}</td>
                     <td>{{ client.suffix }}</td>
                     <td>{{ client.ssn }}</td>
-                    <td>{{ client.site_location }}</td>
+                    <td>{{ client.driver_license_number }}</td>
                 </tr>
             </table>
             <br>
@@ -46,13 +46,15 @@
                     <th>Sexual Orientation</th>
                     <th>Race</th>
                     <th>Ethnicity</th>
+                    <th>Site Location</th>
                 </tr>
                 <tr>
-                    <td>{{ client.gender[1] }}</td>
+                    <td>{{ client.gender }}</td>
                     <td>{{ client.genderID[1] }}</td>
                     <td>{{ client.sexual_orientation[1] }}</td>
                     <td>{{ client.race[1] }}</td>
                     <td>{{ client.ethnicity[1] }}</td>
+                    <td>{{ client.site_location }}</td>
                 </tr>
             </table>
             <br>

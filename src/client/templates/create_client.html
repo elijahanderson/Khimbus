@@ -30,7 +30,7 @@
       {% for message in form.genderID.errors %}
          <div>{{ message }}</div>
       {% endfor %}
-        
+
       {% for message in form.sexual_orientation.errors %}
          <div>{{ message }}</div>
       {% endfor %}
@@ -47,6 +47,10 @@
          <div>{{ message }}</div>
       {% endfor %}
 
+      {% for message in form.dln.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
       {% for message in form.site_location.errors %}
          <div>{{ message }}</div>
       {% endfor %}
@@ -58,7 +62,7 @@
       {% for message in form.phone_home.errors %}
          <div>{{ message }}</div>
       {% endfor %}
-        
+
       {% for message in form.phone_cell.errors %}
          <div>{{ message }}</div>
       {% endfor %}
@@ -94,7 +98,7 @@
       {% for message in form.zip_code.errors %}
          <div>{{ message }}</div>
       {% endfor %}
-        
+
       {% for message in form.guardian_name.errors %}
          <div>{{ message }}</div>
       {% endfor %}
@@ -191,6 +195,10 @@
          <div>{{ message }}</div>
       {% endfor %}
 
+      {% if success == 'False' %}
+         <h5>(Client could not be registered, likely due to a server issue -- please try again in a few moments)</h5>
+      {% endif %}
+
          <form method=POST action="{{ url_for('client_views.create_client') }}">
             <fieldset>
                 {{ form.hidden_tag() }}
@@ -240,6 +248,10 @@
                     <br>
                     {{ form.ssn.label }}
                     {{ form.ssn }}
+                    <br>
+                    <br>
+                    {{ form.dln.label }}
+                    {{ form.dln }}
                     <br>
                     <br>
                     {{ form.site_location.label }}
