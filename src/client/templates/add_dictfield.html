@@ -1,0 +1,188 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="main-header">
+        <h1>Update Client</h1>
+        <br>
+        {% if field == 'addresses' %}
+            {% for message in form.type.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.street_address.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.city.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.state.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.zip_code.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            <form method=POST action={{ form_url }}>
+                <fieldset>
+                    {{ form.hidden_tag() }}
+                    <div>
+                        {{ form.type.label }}
+                        {{ form.type }}
+                        <br>
+                        <br>
+                        {{ form.street_address.label }}
+                        {{ form.street_address }}
+                        <br>
+                        <br>
+                        {{ form.city.label }}
+                        {{ form.city }}
+                        <br>
+                        <br>
+                        {{ form.state.label }}
+                        {{ form.state }}
+                        <br>
+                        <br>
+                        {{ form.zip_code.label }}
+                        {{ form.zip_code }}
+                        <br>
+                        <br>
+                        {{ form.update }}
+                    </div>
+                </fieldset>
+            </form>
+        {% elif field == 'disabilities' %}
+            {% for message in form.disability.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.disability_desc.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.accommodations.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            <form method=POST action={{ form_url }}>
+                <fieldset>
+                    {{ form.hidden_tag() }}
+                    <div>
+                        {{ form.disability.label }}
+                        {{ form.disability }}
+                        <br>
+                        <br>
+                        {{ form.disability_desc.label }}
+                        {{ form.disability_desc }}
+                        <br>
+                        <br>
+                        {{ form.accommodations.label }}
+                        {{ form.accommodations }}
+                        <br>
+                        <br>
+                        {{ form.update }}
+                    </div>
+                </fieldset>
+            </form>
+        {% elif field == 'emergency_contacts' %}
+            {% for message in form.ER_name.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.ER_relationship.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.ER_phone.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.ER_address.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.ER_email.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.can_visit.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.can_pickup.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            <form method=POST action={{ form_url }}>
+                <fieldset>
+                    {{ form.hidden_tag() }}
+                    <div>
+                        {{ form.ER_name.label }}
+                        {{ form.ER_name }}
+                        <br>
+                        <br>
+                        {{ form.ER_relationship.label }}
+                        {{ form.ER_relationship }}
+                        <br>
+                        <br>
+                        {{ form.ER_phone.label }}
+                        {{ form.ER_phone }}
+                        <br>
+                        <br>
+                        {{ form.ER_address.label }}
+                        {{ form.ER_address }}
+                        <br>
+                        <br>
+                        {{ form.ER_email.label }}
+                        {{ form.ER_email }}
+                        <br>
+                        <br>
+                        {{ form.can_visit.label }}
+                        {{ form.can_visit }}
+                        <br>
+                        <br>
+                        {{ form.can_pickup.label }}
+                        {{ form.can_pickup }}
+                        <br>
+                        <br>
+                        {{ form.update }}
+                    </div>
+                </fieldset>
+            </form>
+        {% elif field == 'guardian_info' %}
+            {% for message in form.guardian_name.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.guardian_type.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            {% for message in form.guardian_phone.errors %}
+            <div>{{ message }}</div>
+            {% endfor %}
+
+            <form method=POST action={{ form_url }}>
+                <fieldset>
+                    {{ form.hidden_tag() }}
+                    <div>
+                        {{ form.guardian_name.label }}
+                        {{ form.guardian_name }}
+                        <br>
+                        <br>
+                        {{ form.guardian_type.label }}
+                        {{ form.guardian_type }}
+                        <br>
+                        <br>
+                        {{ form.guardian_phone.label }}
+                        {{ form.guardian_phone }}
+                        <br>
+                        <br>
+                        {{ form.update }}
+                    </div>
+                </fieldset>
+            </form>
+        {% endif %}
+    </div>
+{% endblock content %}

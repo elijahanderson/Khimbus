@@ -60,6 +60,21 @@ def determine_longform_select(field):
         return [field, 'Hispanic or Latino']
     elif field == '02':
         return [field, 'Non Hispanic or Latino']
+    # religion
+    elif field == 'Ch':
+        return [field, 'Christianity']
+    elif field == 'Ju':
+        return [field, 'Judaism']
+    elif field == 'Is':
+        return [field, 'Islam']
+    elif field == 'Hi':
+        return [field, 'Hinduism']
+    elif field == 'Bu':
+        return [field, 'Buddhism']
+    elif field == 'O':
+        return [field, 'Other']
+    elif field == 'Naf':
+        return [field, 'Not Affiliated']
     # address type
     elif field == 'Perm':
         return [field, 'Permanent Residence']

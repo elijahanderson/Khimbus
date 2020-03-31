@@ -46,15 +46,15 @@
                     <th>Sexual Orientation</th>
                     <th>Race</th>
                     <th>Ethnicity</th>
-                    <th>Site Location</th>
+                    <th>Religion</th>
                 </tr>
                 <tr>
                     <td>{{ client.gender }}</td>
-                    <td>{{ client.genderID[1] }}</td>
-                    <td>{{ client.sexual_orientation[1] }}</td>
-                    <td>{{ client.race[1] }}</td>
-                    <td>{{ client.ethnicity[1] }}</td>
-                    <td>{{ client.site_location }}</td>
+                    <td>{{ client.genderID }}</td>
+                    <td>{{ client.sexual_orientation }}</td>
+                    <td>{{ client.race }}</td>
+                    <td>{{ client.ethnicity }}</td>
+                    <td>{{ client.religion }}</td>
                 </tr>
             </table>
             <br>
@@ -68,13 +68,22 @@
                     <th>State</th>
                     <th>ZIP Code</th>
                 </tr>
-                <tr>
-                    <td>{{ client.addresses['0']['type'][1] }}</td>
-                    <td>{{ client.addresses['0']['street_address'] }}</td>
-                    <td>{{ client.addresses['0']['city'] }}</td>
-                    <td>{{ client.addresses['0']['state'] }}</td>
-                    <td>{{ client.addresses['0']['zip_code'] }}</td>
+                {% for i in range(client.addresses|length) %}
+                <tr class="r0">
+                    <td>{{ i+1 }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
+                <tr>
+                    <td>{{ client.addresses[i|string]['type'][1] }}</td>
+                    <td>{{ client.addresses[i|string]['street_address'] }}</td>
+                    <td>{{ client.addresses[i|string]['city'] }}</td>
+                    <td>{{ client.addresses[i|string]['state'] }}</td>
+                    <td>{{ client.addresses[i|string]['zip_code'] }}</td>
+                </tr>
+                {% endfor %}
             </table>
             <br>
             <br>
@@ -104,11 +113,18 @@
                     <th>Type</th>
                     <th>Guardian Phone</th>
                 </tr>
-                <tr>
-                    <td>{{ client.guardian_info['0']['guardian_name'] }}</td>
-                    <td>{{ client.guardian_info['0']['guardian_type'][1] }}</td>
-                    <td>{{ client.guardian_info['0']['guardian_phone'] }}</td>
+                {% for i in range(client.guardian_info|length) %}
+                 <tr class="r0">
+                    <td>{{ i+1 }}</td>
+                    <td></td>
+                    <td></td>
                 </tr>
+                <tr>
+                    <td>{{ client.guardian_info[i|string]['guardian_name'] }}</td>
+                    <td>{{ client.guardian_info[i|string]['guardian_type'][1] }}</td>
+                    <td>{{ client.guardian_info[i|string]['guardian_phone'] }}</td>
+                </tr>
+                {% endfor %}
             </table>
             <br>
             <br>
@@ -119,11 +135,18 @@
                     <th>Relationship To</th>
                     <th>Address</th>
                 </tr>
-                <tr>
-                    <td>{{ client.emergency_contacts['0']['ER_name'] }}</td>
-                    <td>{{ client.emergency_contacts['0']['ER_relationship'][1] }}</td>
-                    <td>{{ client.emergency_contacts['0']['ER_address'] }}</td>
+                {% for i in range(client.emergency_contacts|length) %}
+                <tr class="r0">
+                    <td>{{ i+1 }}</td>
+                    <td></td>
+                    <td></td>
                 </tr>
+                <tr>
+                    <td>{{ client.emergency_contacts[i|string]['ER_name'] }}</td>
+                    <td>{{ client.emergency_contacts[i|string]['ER_relationship'][1] }}</td>
+                    <td>{{ client.emergency_contacts[i|string]['ER_address'] }}</td>
+                </tr>
+                {% endfor %}
             </table>
             <br>
             <table>
@@ -133,12 +156,20 @@
                     <th>Can Visit</th>
                     <th>Can Pick Up Client</th>
                 </tr>
-                <tr>
-                    <td>{{ client.emergency_contacts['0']['ER_phone'] }}</td>
-                    <td>{{ client.emergency_contacts['0']['ER_email'] }}</td>
-                    <td>{{ client.emergency_contacts['0']['ER_can_visit'] }}</td>
-                    <td>{{ client.emergency_contacts['0']['ER_can_pickup'] }}</td>
+                {% for i in range(client.emergency_contacts|length) %}
+                <tr class="r0">
+                    <td>{{ i+1 }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
+                <tr>
+                    <td>{{ client.emergency_contacts[i|string]['ER_phone'] }}</td>
+                    <td>{{ client.emergency_contacts[i|string]['ER_email'] }}</td>
+                    <td>{{ client.emergency_contacts[i|string]['ER_can_visit'] }}</td>
+                    <td>{{ client.emergency_contacts[i|string]['ER_can_pickup'] }}</td>
+                </tr>
+                {% endfor %}
             </table>
             <br>
             <br>
@@ -185,11 +216,18 @@
                     <th>Description</th>
                     <th>Accommodations</th>
                 </tr>
-                <tr>
-                    <td>{{ client.disabilities['0']['disability_name'] }}</td>
-                    <td>{{ client.disabilities['0']['disability_description'] }}</td>
-                    <td>{{ client.disabilities['0']['disability_accommodations'] }}</td>
+                {% for i in range(client.disabilities|length) %}
+                <tr class="r0">
+                    <td>{{ i+1 }}</td>
+                    <td></td>
+                    <td></td>
                 </tr>
+                <tr>
+                    <td>{{ client.disabilities[i|string]['disability_name'] }}</td>
+                    <td>{{ client.disabilities[i|string]['disability_description'] }}</td>
+                    <td>{{ client.disabilities[i|string]['disability_accommodations'] }}</td>
+                </tr>
+                {% endfor %}
             </table>
             <br>
             <br>
@@ -202,8 +240,8 @@
                     <th>Reading Languages</th>
                 </tr>
                 <tr>
-                    <td>{{ client.employment_status[1] }}</td>
-                    <td>{{ client.education_level[1] }}</td>
+                    <td>{{ client.employment_status }}</td>
+                    <td>{{ client.education_level }}</td>
                     <td>{{ client.spoken_langs }}</td>
                     <td>{{ client.reading_langs }}</td>
                 </tr>

@@ -75,7 +75,7 @@
                            {'clientID': client.clientID, 'field': 'ethnicity'} }}">Ethnicity</a></th>
                     <th><a class="header-btn"
                            href="{{ '/update-client-field/%(clientID)s-%(field)s' %
-                           {'clientID': client.clientID, 'field': 'site_location'} }}">Site Location</a></th>
+                           {'clientID': client.clientID, 'field': 'religion'} }}">Religion</a></th>
                 </tr>
                 <tr>
                     <td><a class="btn"
@@ -83,19 +83,19 @@
                            {'clientID': client.clientID, 'field': 'gender'} }}">{{ client.gender }}</a></td>
                     <td><a class="btn"
                            href="{{ '/update-client-field/%(clientID)s-%(field)s' %
-                           {'clientID': client.clientID, 'field': 'genderID'} }}">{{ client.genderID[1] }}</a></td>
+                           {'clientID': client.clientID, 'field': 'genderID'} }}">{{ client.genderID }}</a></td>
                     <td><a class="btn"
                            href="{{ '/update-client-field/%(clientID)s-%(field)s' %
-                           {'clientID': client.clientID, 'field': 'sexual_orientation'} }}">{{ client.sexual_orientation[1] }}</a></td>
+                           {'clientID': client.clientID, 'field': 'sexual_orientation'} }}">{{ client.sexual_orientation }}</a></td>
                     <td><a class="btn"
                            href="{{ '/update-client-field/%(clientID)s-%(field)s' %
-                           {'clientID': client.clientID, 'field': 'race'} }}">{{ client.race[1] }}</a></td>
+                           {'clientID': client.clientID, 'field': 'race'} }}">{{ client.race }}</a></td>
                     <td><a class="btn"
                            href="{{ '/update-client-field/%(clientID)s-%(field)s' %
-                           {'clientID': client.clientID, 'field': 'ethnicity'} }}">{{ client.ethnicity[1] }}</a></td>
+                           {'clientID': client.clientID, 'field': 'ethnicity'} }}">{{ client.ethnicity }}</a></td>
                     <td><a class="btn"
                            href="{{ '/update-client-field/%(clientID)s-%(field)s' %
-                           {'clientID': client.clientID, 'field': 'site_location'} }}">{{ client.site_location }}</a>
+                           {'clientID': client.clientID, 'field': 'religion'} }}">{{ client.religion }}</a>
                     </td>
                 </tr>
             </table>
@@ -105,61 +105,85 @@
             <table>
                 <tr>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'addresses',
-                           'to_update': 'type'} }}">Address Type</a></th>
+                           'to_update': 'type',
+                           'num': '1'} }}">Address Type</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'addresses',
-                           'to_update': 'street_address'} }}">Street Address</a></th>
+                           'to_update': 'street_address',
+                           'num': '1'} }}">Street Address</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'addresses',
-                           'to_update': 'city'} }}">City</a></th>
+                           'to_update': 'city',
+                           'num': '1'} }}">City</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'addresses',
-                           'to_update': 'state'} }}">State</a></th>
+                           'to_update': 'state',
+                           'num': '1'} }}">State</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'addresses',
-                           'to_update': 'zip_code'} }}">ZIP Code</a></th>
+                           'to_update': 'zip_code',
+                           'num': '1'} }}">ZIP Code</a></th>
+                </tr>
+                {% for i in range(client.addresses|length) %}
+                <tr class="r0">
+                    <td>{{ i+1 }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'addresses',
-                           'to_update': 'type'} }}">{{ client.addresses['0']['type'][1] }}</a></td>
+                           'to_update': 'type',
+                           'num': i} }}">{{ client.addresses[i|string]['type'][1] }}</a></td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'addresses',
-                           'to_update': 'street_address'} }}">{{ client.addresses['0']['street_address'] }}</a></td>
+                           'to_update': 'street_address',
+                           'num': i} }}">{{ client.addresses[i|string]['street_address'] }}</a></td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'addresses',
-                           'to_update': 'city'} }}">{{ client.addresses['0']['city'] }}</a>
+                           'to_update': 'city',
+                           'num': i} }}">{{ client.addresses[i|string]['city'] }}</a>
                     </td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'addresses',
-                           'to_update': 'state'} }}">{{ client.addresses['0']['state'] }}</a>
+                           'to_update': 'state',
+                           'num': i} }}">{{ client.addresses[i|string]['state'] }}</a>
                     </td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'addresses',
-                           'to_update': 'zip_code'} }}">{{ client.addresses['0']['zip_code'] }}</a></td>
+                           'to_update': 'zip_code',
+                           'num': i} }}">{{ client.addresses[i|string]['zip_code'] }}</a></td>
                 </tr>
+                {% endfor %}
             </table>
+            <a class="header-btn"
+               href="{{ '/add-dictfield/%(clientID)s-%(field)s' %
+               {'clientID': client.clientID,
+               'field': 'addresses'} }}">+ Add address</a>
+            <br>
             <br>
             <br>
             <h4>Contact Information</h4>
@@ -205,129 +229,181 @@
             <table>
                 <tr>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'guardian_info',
-                           'to_update': 'guardian_name'} }}">Guardian Name</a></th>
+                           'to_update': 'guardian_name',
+                           'num': '1'} }}">Guardian Name</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'guardian_info',
-                           'to_update': 'guardian_type'} }}">Type</a></th>
+                           'to_update': 'guardian_type',
+                           'num': '1'} }}">Guardian Type</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'guardian_info',
-                           'to_update': 'guardian_phone'} }}">Guardian Phone</a></th>
+                           'to_update': 'guardian_phone',
+                           'num': '1'} }}">Guardian Phone</a></th>
+                </tr>
+                {% for i in range(client.guardian_info|length) %}
+                <tr class="r0">
+                    <td>{{ i+1 }}</td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'guardian_info',
-                           'to_update': 'guardian_name'} }}">{{ client.guardian_info['0']['guardian_name'] }}</a></td>
+                           'to_update': 'guardian_name',
+                           'num': i} }}">{{ client.guardian_info[i|string]['guardian_name'] }}</a></td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'guardian_info',
-                           'to_update': 'guardian_type'} }}">{{ client.guardian_info['0']['guardian_type'][1] }}</a>
+                           'to_update': 'guardian_type',
+                           'num': i} }}">{{ client.guardian_info[i|string]['guardian_type'][1] }}</a>
                     </td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'guardian_info',
-                           'to_update': 'guardian_phone'} }}">{{ client.guardian_info['0']['guardian_phone'] }}</a></td>
+                           'to_update': 'guardian_phone',
+                           'num': i} }}">{{ client.guardian_info[i|string]['guardian_phone'] }}</a></td>
                 </tr>
+                {% endfor %}
             </table>
+            <a class="header-btn"
+               href="{{ '/add-dictfield/%(clientID)s-%(field)s' %
+               {'clientID': client.clientID,
+               'field': 'guardian_info'} }}">+ Add guardian</a>
+            <br>
             <br>
             <br>
             <h4>Emergency Contact Info</h4>
             <table>
                 <tr>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_name'} }}">Name</a></th>
+                           'to_update': 'ER_name',
+                           'num': '1'} }}">Name</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_relationship'} }}">Relationship To</a></th>
+                           'to_update': 'ER_relationship',
+                           'num': '1'} }}">Relationship To</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_address'} }}">Address</a></th>
+                           'to_update': 'ER_address',
+                           'num': '1'} }}">Address</a></th>
+                </tr>
+                {% for i in range(client.emergency_contacts|length) %}
+                <tr class="r0">
+                    <td>{{ i+1 }}</td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_name'} }}">{{ client.emergency_contacts['0']['ER_name'] }}</a></td>
+                           'to_update': 'ER_name',
+                           'num': i} }}">{{ client.emergency_contacts[i|string]['ER_name'] }}</a></td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_relationship'} }}">
-                        {{ client.emergency_contacts['0']['ER_relationship'][1] }}</a></td>
+                           'to_update': 'ER_relationship',
+                           'num': i} }}">
+                        {{ client.emergency_contacts[i|string]['ER_relationship'][1] }}</a></td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_address'} }}">{{ client.emergency_contacts['0']['ER_address'] }}</a></td>
+                           'to_update': 'ER_address',
+                           'num': i} }}">{{ client.emergency_contacts[i|string]['ER_address'] }}</a></td>
                 </tr>
+                {% endfor %}
             </table>
             <br>
             <table>
                 <tr>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_phone'} }}">Phone</a></th>
+                           'to_update': 'ER_phone',
+                           'num': '1'} }}">Phone</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_email'} }}">Email</a></th>
+                           'to_update': 'ER_email',
+                           'num': '1'} }}">Email</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_can_visit'} }}">Can Visit</a></th>
+                           'to_update': 'ER_can_visit',
+                           'num': '1'} }}">Can Visit</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_can_pickup'} }}">Can Pick Up Client</a></th>
+                           'to_update': 'ER_can_pickup',
+                           'num': '1'} }}">Can Pick Up Client</a></th>
+                </tr>
+                {% for i in range(client.emergency_contacts|length) %}
+                <tr class="r0">
+                    <td>{{ i+1 }}</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_phone'} }}">{{ client.emergency_contacts['0']['ER_phone'] }}</a></td>
+                           'to_update': 'ER_phone',
+                           'num': i} }}">{{ client.emergency_contacts[i|string]['ER_phone'] }}</a></td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_email'} }}">{{ client.emergency_contacts['0']['ER_email'] }}</a></td>
+                           'to_update': 'ER_email',
+                           'num': i} }}">{{ client.emergency_contacts[i|string]['ER_email'] }}</a></td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_can_visit'} }}">{{ client.emergency_contacts['0']['ER_can_visit'] }}</a>
-                    </td>
+                           'to_update': 'ER_can_visit',
+                           'num': i} }}">
+                        {{ client.emergency_contacts[i|string]['ER_can_visit'] }}</a></td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'emergency_contacts',
-                           'to_update': 'ER_can_pickup'} }}">{{ client.emergency_contacts['0']['ER_can_pickup'] }}</a>
-                    </td>
+                           'to_update': 'ER_can_pickup',
+                           'num': i} }}">{{ client.emergency_contacts[i|string]['ER_can_pickup'] }}</a></td>
+                </tr>
+                {% endfor %}
                 </tr>
             </table>
+            <a class="header-btn"
+               href="{{ '/add-dictfield/%(clientID)s-%(field)s' %
+               {'clientID': client.clientID,
+               'field': 'emergency_contacts'} }}">+ Add emergency contact</a>
+            <br>
             <br>
             <br>
             <h4>Demographic Information</h4>
@@ -375,27 +451,31 @@
             <table>
                 <tr>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'marital_hist',
-                           'to_update': 'marital_status'} }}">Status</a></th>
+                           'to_update': 'marital_status',
+                           'num': '1'} }}">Status</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'marital_hist',
-                           'to_update': 'div_reason'} }}">Reason for Separation</a></th>
+                           'to_update': 'div_reason',
+                           'num': '1'} }}">Reason for Separation</a></th>
                 </tr>
                 <tr>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'marital_hist',
-                           'to_update': 'marital_status'} }}">{{ client.marital_hist['marital_status'][1] }}</a></td>
+                           'to_update': 'marital_status',
+                           'num': '1'} }}">{{ client.marital_hist['marital_status'][1] }}</a></td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'marital_hist',
-                           'to_update': 'div_reason'} }}">{{ client.marital_hist['div_reason'] }}</a></td>
+                           'to_update': 'div_reason',
+                           'num': '1'} }}">{{ client.marital_hist['div_reason'] }}</a></td>
                 </tr>
             </table>
             <br>
@@ -404,42 +484,60 @@
             <table>
                 <tr>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'disabilities',
-                           'to_update': 'disability_name'} }}">Name</a></th>
+                           'to_update': 'disability_name',
+                           'num': '1'} }}">Name</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'disabilities',
-                           'to_update': 'disability_description'} }}">Description</a></th>
+                           'to_update': 'disability_description',
+                           'num': '1'} }}">Description</a></th>
                     <th><a class="header-btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'disabilities',
-                           'to_update': 'disability_accommodations'} }}">Accommodations</a></th>
+                           'to_update': 'disability_accommodations',
+                           'num': '1'} }}">Accommodations</a></th>
+                </tr>
+                {% for i in range(client.disabilities|length) %}
+                <tr class="r0">
+                    <td>{{ i+1 }}</td>
+                    <td></td>
+                    <td></td>
                 </tr>
                 <tr>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'disabilities',
-                           'to_update': 'disability_name'} }}">{{ client.disabilities['0']['disability_name'] }}</a>
+                           'to_update': 'disability_name',
+                           'num': i} }}">{{ client.disabilities[i|string]['disability_name'] }}</a>
                     </td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'disabilities',
-                           'to_update': 'disability_description'} }}">
-                        {{ client.disabilities['0']['disability_description'] }}</a></td>
+                           'to_update': 'disability_description',
+                           'num': i} }}">
+                        {{ client.disabilities[i|string]['disability_description'] }}</a></td>
                     <td><a class="btn"
-                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s' %
+                           href="{{ '/update-dictfield/%(clientID)s-%(field)s-%(to_update)s-%(num)s' %
                            {'clientID': client.clientID,
                            'field': 'disabilities',
-                           'to_update': 'disability_accommodations'} }}">
-                        {{ client.disabilities['0']['disability_accommodations'] }}</a></td>
+                           'to_update': 'disability_accommodations',
+                           'num': i} }}">
+                        {{ client.disabilities[i|string]['disability_accommodations'] }}</a></td>
                 </tr>
+                {% endfor %}
             </table>
+            <a class="header-btn"
+               href="{{ '/add-dictfield/%(clientID)s-%(field)s' %
+               {'clientID': client.clientID,
+               'field': 'disabilities'} }}">+ Add disability</a>
+            <br>
             <br>
             <br>
             <h4>Employment/Education</h4>
@@ -463,11 +561,11 @@
                     <td><a class="btn"
                            href="{{ '/update-client-field/%(clientID)s-%(field)s' %
                            {'clientID': client.clientID, 'field': 'employment_status'} }}">{{
-                        client.employment_status[1] }}</a></td>
+                        client.employment_status }}</a></td>
                     <td><a class="btn"
                            href="{{ '/update-client-field/%(clientID)s-%(field)s' %
                            {'clientID': client.clientID, 'field': 'education_level'} }}">{{
-                        client.education_level[1] }}</a></td>
+                        client.education_level }}</a></td>
                     <td><a class="btn"
                            href="{{ '/update-client-field/%(clientID)s-%(field)s' %
                            {'clientID': client.clientID, 'field': 'spoken_langs'} }}">{{ client.spoken_langs }}</a></td>

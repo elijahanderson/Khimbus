@@ -30,6 +30,7 @@ class ClientRegistration(FlaskForm):
     race = SelectField('Race*: ', validators=[validators.required('Please select race')],
                        choices=client_choices['race'])
     ethnicity = SelectField('Ethnicity: ', choices=client_choices['ethnicity'])
+    religion = SelectField('Religion: ', choices=client_choices['religion'])
 
     ssn = StringField('Social Security # (No dashes, only numbers)*: ', validators=[validators.
                       required('Please enter a valid SSN'),
@@ -78,6 +79,15 @@ class ClientRegistration(FlaskForm):
     zip_code = StringField('ZIP code*: ', validators=[validators.required('Please enter valid ZIP code'),
                                                       validators.length(min=5, max=10)])
 
+    address_type2 = SelectField('Address 2 type: ',
+                               choices=client_choices['type'])
+    street_address2 = StringField('Street Address 2: ', validators=[validators.optional(strip_whitespace=True),
+                                                                     validators.length(min=4, max=80)])
+    city2 = StringField('City 2: ', [validators.optional(strip_whitespace=True),
+                                      validators.length(min=2, max=40)])
+    state2 = StringField('State 2: ', [validators.optional(strip_whitespace=True)])
+    zip_code2 = StringField('ZIP code 2: ', validators=[validators.length(min=5, max=10)])
+
     # guardian info -- { person1: {name: str, type: int (codes), effective_date: dt, enddate: dt, phone: int}}
     guardian_name = StringField('Guardian name: ', validators=[validators.optional(strip_whitespace=True),
                                                                validators.length(min=3, max=50)])
@@ -85,6 +95,14 @@ class ClientRegistration(FlaskForm):
     guardian_phone = StringField('Guardian phone #: ', validators=[validators.optional(strip_whitespace=True),
                                                                    validators.length(min=10, max=14),
                                                                    validators.optional(strip_whitespace=True)])
+
+    guardian_name2 = StringField('Guardian 2 name: ', validators=[validators.optional(strip_whitespace=True),
+                                                                validators.length(min=3, max=50)])
+    guardian_type2 = SelectField('Guardian 2 type: ', choices=client_choices['guardian_type'])
+    guardian_phone2 = StringField('Guardian 2 phone #: ', validators=[validators.optional(strip_whitespace=True),
+                                                                    validators.length(min=10, max=14),
+                                                                    validators.optional(strip_whitespace=True)])
+
     # emergency contact info -- { person1: {name: str, relationship: int (codes), phone: int, address: str, email: str,
     #                                      can_visit: bool, can_pickup: bool }}
     ER_name = StringField('Emergency contact name*: ', validators=[validators.
@@ -106,6 +124,19 @@ class ClientRegistration(FlaskForm):
     can_visit = BooleanField('Can emergency contact visit?: ')
     can_pickup = BooleanField('Can emergency contact pick client up?: ')
 
+    ER_name2 = StringField('Emergency contact 2 name: ', validators=[validators.optional(strip_whitespace=True),
+                                                                      validators.length(min=3, max=50)])
+    ER_relationship2 = SelectField('Relationship to emergency contact 2: ', choices=client_choices['ER_relationship'])
+    ER_phone2 = StringField('Emergency contact 2 phone no.: ', validators=[validators.optional(strip_whitespace=True),
+                                                                            validators.length(min=10, max=14)])
+    ER_address2 = StringField('Emergency contact 2 street address: ', validators=[validators.
+                              optional(strip_whitespace=True),
+                                                                                   validators.length(min=4, max=100)])
+    ER_email2 = StringField('Emergency contact 2 email: ', validators=[validators.email(),
+                                                                        validators.optional(strip_whitespace=True)])
+    can_visit2 = BooleanField('Can emergency contact 2 visit?: ')
+    can_pickup2 = BooleanField('Can emergency contact 2  pick client up?: ')
+
     # demographic info
     dob = DateField('Date of Birth*: ', validators=[validators.required('Please enter valid DOB')], format='%Y-%m-%d')
     intake_date = DateField('Intake Date*: ', validators=[validators.required('Please enter valid intake date')])
@@ -123,11 +154,19 @@ class ClientRegistration(FlaskForm):
     div_reason = StringField('Reason for separation: ', validators=[validators.optional(strip_whitespace=True)])
 
     # disabilities -- {disability1: {name: str, description: str, accomodations: str }}
-    disability = StringField('Enter client disability(ies): ', validators=[validators.optional(strip_whitespace=True)])
+    disability = StringField('Enter client primary disability: ', validators=[validators.optional(strip_whitespace=True)])
     disability_desc = StringField('Description of disability: ',
                                   validators=[validators.optional(strip_whitespace=True)])
     accommodations = StringField('Accommodations for disability: ',
                                  validators=[validators.optional(strip_whitespace=True)])
+
+    disability2 = StringField('Enter client secondary disability: ',
+                              validators=[validators.optional(strip_whitespace=True)])
+    disability_desc2 = StringField('Description of disability 2: ',
+                                   validators=[validators.optional(strip_whitespace=True)])
+    accommodations2 = StringField('Accommodations for disability 2: ',
+                                  validators=[validators.optional(strip_whitespace=True)])
+
 
     # employment & education
     employment_status = SelectField('Select employment status: ',

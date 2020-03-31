@@ -43,6 +43,10 @@
          <div>{{ message }}</div>
       {% endfor %}
 
+      {% for message in form.religion.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
       {% for message in form.ssn.errors %}
          <div>{{ message }}</div>
       {% endfor %}
@@ -99,6 +103,26 @@
          <div>{{ message }}</div>
       {% endfor %}
 
+      {% for message in form.address_type2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.street_address2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.city2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.state2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.zip_code2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
       {% for message in form.guardian_name.errors %}
          <div>{{ message }}</div>
       {% endfor %}
@@ -108,6 +132,18 @@
       {% endfor %}
 
       {% for message in form.guardian_phone.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.guardian_name2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.guardian_type2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.guardian_phone2.errors %}
          <div>{{ message }}</div>
       {% endfor %}
 
@@ -136,6 +172,34 @@
       {% endfor %}
 
       {% for message in form.can_pickup.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.ER_name2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.ER_relationship2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.ER_phone2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.ER_address2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.ER_email2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.can_visit2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.can_pickup2.errors %}
          <div>{{ message }}</div>
       {% endfor %}
 
@@ -176,6 +240,18 @@
       {% endfor %}
 
       {% for message in form.accommodations.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.disability2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.disability_desc2.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.accommodations2.errors %}
          <div>{{ message }}</div>
       {% endfor %}
 
@@ -246,6 +322,10 @@
                     {{ form.ethnicity }}
                     <br>
                     <br>
+                    {{ form.religion.label }}
+                    {{ form.religion }}
+                    <br>
+                    <br>
                     {{ form.ssn.label }}
                     {{ form.ssn }}
                     <br>
@@ -308,6 +388,26 @@
                     {{ form.zip_code }}
                     <br>
                     <br>
+                    {{ form.address_type2.label }}
+                    {{ form.address_type2 }}
+                    <br>
+                    <br>
+                    {{ form.street_address2.label }}
+                    {{ form.street_address2 }}
+                    <br>
+                    <br>
+                    {{ form.city2.label }}
+                    {{ form.city2 }}
+                    <br>
+                    <br>
+                    {{ form.state2.label }}
+                    {{ form.state2 }}
+                    <br>
+                    <br>
+                    {{ form.zip_code2.label }}
+                    {{ form.zip_code2 }}
+                    <br>
+                    <br>
                     <h4>Guardian Info</h4>
                     <br>
                     {{ form.guardian_name.label }}
@@ -320,6 +420,18 @@
                     <br>
                     {{ form.guardian_phone.label }}
                     {{ form.guardian_phone }}
+                    <br>
+                    <br>
+                    {{ form.guardian_name2.label }}
+                    {{ form.guardian_name2 }}
+                    <br>
+                    <br>
+                    {{ form.guardian_type2.label }}
+                    {{ form.guardian_type2 }}
+                    <br>
+                    <br>
+                    {{ form.guardian_phone2.label }}
+                    {{ form.guardian_phone2 }}
                     <br>
                     <br>
                     <h4>Emergency Contact Info</h4>
@@ -350,6 +462,34 @@
                     <br>
                     {{ form.can_pickup.label }}
                     {{ form.can_pickup }}
+                    <br>
+                    <br>
+                    {{ form.ER_name2.label }}
+                    {{ form.ER_name2 }}
+                    <br>
+                    <br>
+                    {{ form.ER_relationship2.label }}
+                    {{ form.ER_relationship2 }}
+                    <br>
+                    <br>
+                    {{ form.ER_phone2.label }}
+                    {{ form.ER_phone2 }}
+                    <br>
+                    <br>
+                    {{ form.ER_address2.label }}
+                    {{ form.ER_address2 }}
+                    <br>
+                    <br>
+                    {{ form.ER_email2.label }}
+                    {{ form.ER_email2 }}
+                    <br>
+                    <br>
+                    {{ form.can_visit2.label }}
+                    {{ form.can_visit2 }}
+                    <br>
+                    <br>
+                    {{ form.can_pickup2.label }}
+                    {{ form.can_pickup2 }}
                     <br>
                     <br>
                     <h4>Demographics</h4>
@@ -394,6 +534,18 @@
                     <br>
                     {{ form.accommodations.label }}
                     {{ form.accommodations }}
+                    <br>
+                    <br>
+                    {{ form.disability2.label }}
+                    {{ form.disability2 }}
+                    <br>
+                    <br>
+                    {{ form.disability_desc2.label }}
+                    {{ form.disability_desc2 }}
+                    <br>
+                    <br>
+                    {{ form.accommodations2.label }}
+                    {{ form.accommodations2 }}
                     <br>
                     <br>
                     <h4>Employment & Education</h4>

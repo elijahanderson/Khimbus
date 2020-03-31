@@ -20,12 +20,18 @@ class Client(me.Document):
     suffix = me.StringField(required=False)
     gender = me.StringField(required=True)
     gender_code = me.StringField(required=True)
-    genderID = me.ListField(required=False)
-    sexual_orientation = me.ListField(required=False)
-    race = me.ListField(required=True)  # required, but can decline to provide
+    genderID = me.StringField(required=False)
+    genderID_code = me.StringField(required=False)
+    sexual_orientation = me.StringField(required=False)
+    sexual_orientation_code = me.StringField(required=False)
+    race = me.StringField(required=True)  # required, but can decline to provide
+    race_code = me.StringField(required=True)
     ethnicity = me.ListField(required=False)
+    ethnicity_code = me.StringField(required=False)
     ssn = me.IntField(required=True)
     driver_license_number = me.StringField(required=False)
+    religion = me.StringField(required=False)
+    religion_code = me.StringField(required=False)
     site_location = me.StringField(required=True)
     # medicaid info -- { medicaid_number: int, effective_date: dt, expiration_date: dt }
     medicaid = me.DictField(required=False)
@@ -41,10 +47,11 @@ class Client(me.Document):
     addresses = me.DictField(required=True)
 
     # guardian info -- { person1: {name: str, type: int (codes), effective_date: dt, enddate: dt, phone: int}}
+    #
     guardian_info = me.DictField(required=False)
 
     # emergency contact info -- { person1: {name: str, relationship: int (codes), phone: int, address: str, email: str,
-    #                                      can_visit: bool, can_pickup: bool }}
+    #                                       can_visit: bool, can_pickup: bool }}
     emergency_contacts = me.DictField(required=True)
 
     # demographic info
@@ -59,8 +66,10 @@ class Client(me.Document):
     disabilities = me.DictField(required=False)
 
     # employment / education
-    employment_status = me.ListField(required=True)
-    education_level = me.ListField(required=False)
+    employment_status = me.StringField(required=True)
+    employment_status_code = me.StringField(required=True)
+    education_level = me.StringField(required=False)
+    education_level_code = me.StringField(required=False)
 
     # languages
     spoken_langs = me.ListField(required=True)

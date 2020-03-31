@@ -4,11 +4,12 @@ from src.data.clients import Client
 from src.infrastructure.longform_select import determine_longform_select, determine_employment
 
 
-def add_client(clientID, firstname, lastname, middlename, suffix, gender, gender_code, genderID, sexual_orientation,
-               race, ethnicity, ssn, dln, site_location, medicaid, phone_home, phone_cell, phone_work, email, contact_pref,
+def add_client(clientID, firstname, lastname, middlename, suffix, gender, genderID, sexual_orientation, race, ethnicity,
+               religion, ssn, dln, site_location, medicaid, phone_home, phone_cell, phone_work, email, contact_pref,
                addresses, guardian_info, emergency_contacts, dob, intake_date, discharge_date, is_veteran,
                veteran_status, marital_hist, disabilities, employment_status, education_level, spoken_langs,
                reading_langs):
+
     client = Client()
     client.clientID = clientID
     client.other_id_no = clientID
@@ -16,12 +17,18 @@ def add_client(clientID, firstname, lastname, middlename, suffix, gender, gender
     client.lastname = lastname
     client.middlename = middlename
     client.suffix = suffix
-    client.gender = gender
-    client.gender_code = gender_code
-    client.genderID = genderID
-    client.sexual_orientation = sexual_orientation
-    client.race = race
-    client.ethnicity = ethnicity
+    client.gender = gender[1]
+    client.gender_code = gender[0]
+    client.genderID = genderID[1]
+    client.genderID_code = genderID[0]
+    client.sexual_orientation = sexual_orientation[1]
+    client.sexual_orientation_code = sexual_orientation[0]
+    client.race = race[1]
+    client.race_code = race[0]
+    client.ethnicity = ethnicity[1]
+    client.ethnicity_code = ethnicity[0]
+    client.religion = religion[1]
+    client.religion_code = religion[0]
     client.ssn = ssn
     client.driver_license_number = dln
     client.site_location = site_location
@@ -41,8 +48,10 @@ def add_client(clientID, firstname, lastname, middlename, suffix, gender, gender
     client.veteran_status = veteran_status
     client.marital_hist = marital_hist
     client.disabilities = disabilities
-    client.employment_status = employment_status
-    client.education_level = education_level
+    client.employment_status = employment_status[1]
+    client.employment_status_code = employment_status[0]
+    client.education_level = education_level[1]
+    client.education_level_code = education_level[0]
     client.spoken_langs = spoken_langs
     client.reading_langs = reading_langs
     client.save(validate=False)  # validation in front-end
@@ -121,22 +130,32 @@ def repopulate_client(clientID, field_to_update, nvalue):
         client.update(set__gender_code=gvalue[0])
     elif field_to_update == 'genderID':
         gvalue = determine_longform_select(nvalue)
-        client.update(set__genderID=gvalue)
+        client.update(set__genderID=gvalue[1])
+        client.update(set__genderID_code=gvalue[0])
     elif field_to_update == 'sexual_orientation':
         svalue = determine_longform_select(nvalue)
-        client.update(set__sexual_orientation=svalue)
+        client.update(set__sexual_orientation=svalue[1])
+        client.update(set__sexual_orientation_code=svalue[0])
     elif field_to_update == 'race':
         rvalue = determine_longform_select(nvalue)
-        client.update(set__race=rvalue)
+        client.update(set__race=rvalue[1])
+        client.update(set__race_code=rvalue[0])
     elif field_to_update == 'ethnicity':
         evalue = determine_longform_select(nvalue)
-        client.update(set__ethnicity=evalue)
+        client.update(set__ethnicity=evalue[1])
+        client.update(set__ethnicity_code=evalue[0])
+    elif field_to_update == 'religion':
+        rvalue = determine_longform_select(nvalue)
+        client.update(set__religion=rvalue[1])
+        client.update(set__religion_code=rvalue[0])
     elif field_to_update == 'education_level':
         evalue = determine_longform_select(nvalue)
-        client.update(set__education_level=evalue)
+        client.update(set__education_level=evalue[1])
+        client.update(set__education_level_code=evalue[0])
     elif field_to_update == 'employment_status':
         evalue = determine_employment(nvalue)
-        client.update(set__employment_status=evalue)
+        client.update(set__employment_status=evalue[1])
+        client.update(set__employment_status_code=evalue[0])
     elif field_to_update == 'spoken_langs':
         client.update(set__spoken_langs=nvalue)
     elif field_to_update == 'reading_langs':

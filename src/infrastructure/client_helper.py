@@ -58,6 +58,16 @@ client_choices = {
         ('01', 'Hispanic or Latino'),
         ('02', 'Non Hispanic or Latino')
     ],
+    'religion': [
+        ('', 'Select'),
+        ('Ch', 'Christianity'),
+        ('Ju', 'Judaism'),
+        ('Is', 'Islam'),
+        ('Hi', 'Hinduism'),
+        ('Bu', 'Buddhism'),
+        ('O', 'Other'),
+        ('Naf', 'Not Affiliated')
+    ],
     'type': [
         ('', 'Select'),
         ('Perm', 'Permanent Residence'),

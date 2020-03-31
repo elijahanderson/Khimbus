@@ -4,8 +4,8 @@ from os import environ
 
 from src.client.forms.client_registration import ClientRegistration
 from src.client.forms.client_search import ClientSearchForm
-from src.client.forms.update_client import UpdateClient, UpdateClientBool, UpdateClientDate, UpdateClientDict, \
-    UpdateClientSelect, UpdateClientSelectMultiple
+from src.client.forms.update_client import AddAddress, AddDisability, AddEmergencyContact, AddGuardian, UpdateClient, \
+    UpdateClientBool, UpdateClientDate, UpdateClientSelect, UpdateClientSelectMultiple
 from src.infrastructure.client_helper import client_choices
 from src.infrastructure.longform_select import determine_longform_select, determine_employment, \
     determine_er_relationship, determine_guardian_type
@@ -193,10 +193,14 @@ def create_client():
             sexual_orientation = determine_longform_select(form.sexual_orientation.data)
             race = determine_longform_select(form.race.data)
             ethnicity = determine_longform_select(form.ethnicity.data)
+            religion = determine_longform_select(form.religion.data)
             guardian_type = determine_guardian_type(form.guardian_type.data)
+            guardian_type2 = determine_guardian_type(form.guardian_type2.data)
             address_type = determine_longform_select(form.address_type.data)
+            address_type2 = determine_longform_select(form.address_type2.data)
             employment_status = determine_employment(form.employment_status.data)
             ER_relationship = determine_er_relationship(form.ER_relationship.data)
+            ER_relationship2 = determine_er_relationship(form.ER_relationship2.data)
             marital_status = determine_longform_select(form.marital_status.data)
             education_level = determine_longform_select(form.education_level.data)
             medicaid = {'medicaid_number': form.medicaid_number.data, 'effective_date': None, 'expiration_date': None}
@@ -204,32 +208,51 @@ def create_client():
                                'street_address': form.street_address.data,
                                'city': form.city.data,
                                'state': form.state.data,
-                               'zip_code': form.zip_code.data}}
+                               'zip_code': form.zip_code.data},
+                         '1': {'type': address_type2,
+                               'street_address': form.street_address2.data,
+                               'city': form.city2.data,
+                               'state': form.state2.data,
+                               'zip_code': form.zip_code2.data}}
             guardian_info = {'0': {'guardian_name': form.guardian_name.data,
                                    'guardian_type': guardian_type,
-                                   'guardian_phone': form.guardian_phone.data}}
+                                   'guardian_phone': form.guardian_phone.data},
+                             '1': {'guardian_name': form.guardian_name2.data,
+                                   'guardian_type': guardian_type2,
+                                   'guardian_phone': form.guardian_phone2.data}}
             emergency_contacts = {'0': {'ER_name': form.ER_name.data,
                                         'ER_relationship': ER_relationship,
                                         'ER_phone': form.ER_phone.data,
                                         'ER_address': form.ER_address.data,
                                         'ER_email': form.ER_email.data,
                                         'ER_can_visit': form.can_visit.data,
-                                        'ER_can_pickup': form.can_pickup.data}}
+                                        'ER_can_pickup': form.can_pickup.data},
+                                  '1': {'ER_name': form.ER_name2.data,
+                                        'ER_relationship': ER_relationship2,
+                                        'ER_phone': form.ER_phone2.data,
+                                        'ER_address': form.ER_address2.data,
+                                        'ER_email': form.ER_email2.data,
+                                        'ER_can_visit': form.can_visit2.data,
+                                        'ER_can_pickup': form.can_pickup2.data}}
             marital_hist = {'marital_status': marital_status,
                             'marital_start_date': None,
                             'marital_end_date': None,
                             'div_reason': form.div_reason.data}
             disabilities = {'0': {'disability_name': form.disability.data,
                                   'disability_description': form.disability_desc.data,
-                                  'disability_accommodations': form.accommodations.data}}
+                                  'disability_accommodations': form.accommodations.data},
+                            '1': {'disability_name': form.disability2.data,
+                                  'disability_description': form.disability_desc2.data,
+                                  'disability_accommodations': form.accommodations2.data}}
 
             add_client(form.clientID.data, form.firstname.data, form.lastname.data, form.middlename.data,
-                       form.suffix.data, gender[1], gender[0], genderID, sexual_orientation, race, ethnicity,
-                       form.ssn.data, form.dln.data, form.site_location.data, medicaid, form.phone_home.data, form.phone_cell.data,
-                       form.phone_work.data, form.email.data, form.contact_pref.data, addresses, guardian_info,
-                       emergency_contacts, form.dob.data, form.intake_date.data, form.discharge_date.data,
-                       form.is_veteran.data, form.veteran_status.data, marital_hist, disabilities, employment_status,
-                       education_level, form.spoken_langs.data, form.reading_langs.data)
+                       form.suffix.data, gender, genderID, sexual_orientation, race, ethnicity, religion,
+                       form.ssn.data, form.dln.data, form.site_location.data, medicaid, form.phone_home.data,
+                       form.phone_cell.data, form.phone_work.data, form.email.data, form.contact_pref.data, addresses,
+                       guardian_info, emergency_contacts, form.dob.data, form.intake_date.data,
+                       form.discharge_date.data, form.is_veteran.data, form.veteran_status.data, marital_hist,
+                       disabilities, employment_status, education_level, form.spoken_langs.data,
+                       form.reading_langs.data)
 
             client = find_client_by_ID(form.clientID.data)
             if client:
@@ -251,6 +274,64 @@ def create_client():
                            sidebar_header='Client', links=links)
 
 
+@client_views.route('/add-dictfield/<clientID>-<field>', methods=['GET', 'POST'])
+@login_required
+def add_dictfield(clientID, field):
+    """ REST endpoint to add a new dictionary item for a client. """
+    href = ''
+    if 'username' in session:
+        href = '/user/' + session['username']
+    client = find_client_by_ID(clientID)
+    form = AddAddress()
+
+    if field == 'disabilities':
+        form = AddDisability()
+    elif field == 'emergency_contacts':
+        form = AddEmergencyContact()
+    elif field == 'guardian_info':
+        form = AddGuardian()
+
+    if request.method == 'POST':
+        if form.validate_on_submit():
+            if field == 'addresses':
+                address_type = determine_longform_select(form.type.data)
+                new_address = {str(len(client.addresses)):
+                                   {'type': address_type,
+                                    'street_address': form.street_address.data,
+                                    'city': form.city.data,
+                                    'state': form.state.data,
+                                    'zip_code': form.zip_code.data}}
+                print(new_address)
+                # TODO - make new helper method to update dictfields in backend
+            elif field == 'disabilities':
+                new_disability = {str(len(client.disabilities)):
+                                      {'disability_name': form.disability.data,
+                                       'disability_description': form.disability_desc.data,
+                                       'disability_accommodations': form.accommodations.data}}
+                print(new_disability)
+            elif field == 'emergency_contacts':
+                ER_relationship = determine_er_relationship(form.ER_relationship.data)
+                new_ER_contact = {str(len(client.emergency_contacts)):
+                                      {'ER_name': form.ER_name.data,
+                                       'ER_relationship': ER_relationship,
+                                       'ER_phone': form.ER_phone.data,
+                                       'ER_address': form.ER_address.data,
+                                       'ER_email': form.ER_email.data,
+                                       'ER_can_visit': form.can_visit.data,
+                                       'ER_can_pickup': form.can_pickup.data}}
+                print(new_ER_contact)
+            elif field == 'guardian_info':
+                guardian_type = determine_guardian_type(form.guardian_type.data)
+                new_guardian = {str(len(client.guardian_info)):
+                                    {'guardian_name': form.guardian_name.data,
+                                     'guardian_type': guardian_type,
+                                     'guardian_phone': form.guardian_phone.data}}
+                print(new_guardian)
+
+    return render_template('add_dictfield.html', form=form, title='Update Client', href_var=href,
+                           sidebar_header='Client', links=links, field=field)
+
+
 @client_views.route('/update-client/<clientID>', methods=['GET'])
 @login_required
 def update_client(clientID):
@@ -266,6 +347,7 @@ def update_client(clientID):
 @client_views.route('/update-client-field/<clientID>-<field>', methods=['GET', 'POST'])
 @login_required
 def update_field(clientID, field):
+    """ REST endpoint to update a generic field for a client. """
     href = ''
     if 'username' in session:
         href = '/user/' + session['username']
@@ -273,7 +355,7 @@ def update_field(clientID, field):
     client = find_client_by_ID(clientID)
 
     if field == 'gender' or field == 'genderID' or field == 'sexual_orientation' or field == 'race' \
-            or field == 'ethnicity' or field == 'education_level' or field == 'contact_pref' \
+            or field == 'ethnicity' or field == 'education_level' or field == 'contact_pref' or field == 'religion' \
             or field == 'veteran_status' or field == 'employment_status':
         form.cvalue.data = client[field]
         form.nvalue.choices = client_choices[field]
@@ -299,24 +381,30 @@ def update_field(clientID, field):
                            links=links, form=form)
 
 
-@client_views.route('/update-dictfield/<clientID>-<field>-<to_update>', methods=['GET', 'POST'])
+@client_views.route('/update-dictfield/<clientID>-<field>-<to_update>-<num>', methods=['GET', 'POST'])
 @login_required
-def update_dictfield(clientID, field, to_update):
+def update_dictfield(clientID, field, to_update, num):
+    """ REST endpoint to update a dictionary item for a client. """
     href = ''
     if 'username' in session:
         href = '/user/' + session['username']
     client = find_client_by_ID(clientID)
 
+    # for selectable dict fields, redirect to update-dict-select
     if to_update == 'type' or to_update == 'marital_status' or to_update == 'guardian_type' \
             or to_update == 'ER_relationship' or to_update == 'ER_can_visit' or to_update == 'ER_can_pickup':
         return redirect(url_for('client_views.update_dict_select', clientID=clientID, dict_field=field,
-                                field=to_update))
+                                field=to_update, num=num))
+    # for custom dict fields, go directly to update_field page
     else:
         form = UpdateClient()
         if field == 'marital_hist' or field == 'medicaid':
             form.cvalue.data = client[field][to_update]
         else:
-            form.cvalue.data = client[field]['0'][to_update]
+            if str(num) in client[field]:
+                form.cvalue.data = client[field][str(num)][to_update]
+            else:
+                form.cvalue.data = ''
 
     if request.method == 'POST':
         if form.validate_on_submit():
@@ -324,7 +412,7 @@ def update_dictfield(clientID, field, to_update):
             if field == 'marital_hist' or field == 'medicaid':
                 curr_dict[to_update] = form.nvalue.data
             else:
-                curr_dict['0'][to_update] = form.nvalue.data
+                curr_dict[str(num)][to_update] = form.nvalue.data
 
             return repopulate_client_helper(clientID, field, curr_dict)
 
@@ -332,9 +420,10 @@ def update_dictfield(clientID, field, to_update):
                            links=links, form=form)
 
 
-@client_views.route('/update-dict-select/<clientID>-<dict_field>-<field>', methods=['GET', 'POST'])
+@client_views.route('/update-dict-select/<clientID>-<dict_field>-<field>-<num>', methods=['GET', 'POST'])
 @login_required
-def update_dict_select(clientID, dict_field, field):
+def update_dict_select(clientID, dict_field, field, num):
+    """ Helper REST endpoint to update selectable items in dictionaries. """
     href = ''
     if 'username' in session:
         href = '/user/' + session['username']
@@ -343,12 +432,22 @@ def update_dict_select(clientID, dict_field, field):
 
     if field == 'ER_can_visit' or field == 'ER_can_pickup':
         form = UpdateClientBool()
-        form.cvalue.data = client[dict_field]['0'][field]
+        if str(num) in client[dict_field]:
+            form.cvalue.data = client[dict_field][str(num)][field]
+        else:
+            form.cvalue.data = ''
     elif field == 'marital_status':
-        form.cvalue.data = client[dict_field][field][1]
+        if isinstance(client[dict_field][field], list):
+            form.cvalue.data = client[dict_field][field][1]
+        else:
+            form.cvalue.data = ''
         form.nvalue.choices = client_choices[field]
     else:
-        form.cvalue.data = client[dict_field]['0'][field][1]
+        if str(num) in client[dict_field] and isinstance(client[dict_field][str(num)][field], list):
+            print(client[dict_field])
+            form.cvalue.data = client[dict_field][str(num)][field][1]
+        else:
+            form.cvalue.data = ''
         form.nvalue.choices = client_choices[field]
 
     if request.method == 'POST':
@@ -363,7 +462,7 @@ def update_dict_select(clientID, dict_field, field):
             if field == 'marital_status':
                 curr_dict[field] = nlist
             else:
-                curr_dict['0'][field] = nlist
+                curr_dict[str(num)][field] = nlist
             return repopulate_client_helper(clientID, dict_field, curr_dict)
 
     return render_template('update_field.html', title='Update Client', href_var=href, sidebar_header='Client',
