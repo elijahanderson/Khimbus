@@ -54,8 +54,9 @@ def add_client(clientID, firstname, lastname, middlename, suffix, gender, gender
     client.education_level_code = education_level[0]
     client.spoken_langs = spoken_langs
     client.reading_langs = reading_langs
+
     client.save(validate=False)  # validation in front-end
-    print('New client saved!')
+    print('New client created and saved!')
     return client
 
 
@@ -190,7 +191,7 @@ def repopulate_client(clientID, field_to_update, nvalue):
 
 
 def destroy_client(clientID):
-    print('Deleting...')
+    print('Deleting client...')
     client = Client.objects(clientID=clientID).first()
     if client:
         client.delete()

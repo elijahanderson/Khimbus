@@ -4,6 +4,7 @@ from wtforms.fields.html5 import DateField
 
 from src.infrastructure.client_helper import client_choices
 
+
 class UpdateClient(FlaskForm):
     cvalue = StringField('Old value: ', render_kw={'disabled': True})
     nvalue = StringField('New value: ', validators=[validators.optional(strip_whitespace=True)])

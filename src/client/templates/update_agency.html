@@ -1,0 +1,158 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="main-header">
+        <h1>Update {{ agency.short_name }}</h1>
+        <br>
+        <h6>Click on the property you would like to update.</h6>
+        <div>
+            <br>
+            <h4>Agency Information</h4>
+            <table>
+                <tr>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'name'} }}">Name</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'short_name'} }}">Short Name</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'fiscal_year_start'} }}">Fiscal Year Start</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'ceo'} }}">Executive Director/CEO</a></th>
+                </tr>
+                <tr>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'name'} }}">{{ agency.name }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'short_name'} }}">{{ agency.short_name }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'fiscal_year_start'} }}">{{ agency.fiscal_year_start }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'ceo'} }}">{{ agency.ceo }}</a></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'main_contact'} }}">Main Contact</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'main_contact_email'} }}">Main Contact Email</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'main_contact_phone'} }}">Main Contact Phone</a></th>
+                </tr>
+                <tr>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'main_contact'} }}">{{ agency.main_contact }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'main_contact_email'} }}">{{ agency.main_contact_email }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'main_contact_phone'} }}">{{ agency.main_contact_phone }}</a></td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <h4>Finance Setups</h4>
+            <table>
+                <tr>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'cutoff_date_services'} }}">Services Cutoff Date</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'cutoff_date_billing'} }}">Billing Cutoff Date</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'cutoff_date_icd10'} }}">ICD10 Cutoff Date</a></th>
+                </tr>
+                <tr>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'cutoff_date_services'} }}">{{ agency.cutoff_date_services }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'cutoff_date_billing'} }}">{{ agency.cutoff_date_billing }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'cutoff_date_icd10'} }}">{{ agency.cutoff_date_icd10 }}</a></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'delete_held_claims'} }}">Delete Held Claims</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'held_claim_not_recognize_revenue'} }}">Held Claims Not Recognize Revenue</a></th>
+                </tr>
+                <tr>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'delete_held_claims'} }}">{{ agency.delete_held_claims }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'held_claim_not_recognize_revenue'} }}">
+                           {{ agency.held_claim_not_recognize_revenue }}</a></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'prevent_billed_services_from_billing_again'} }}">
+                           Prevent Billed Services From Billing Again</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'prevent_payroll_services_from_paying_again'} }}">
+                           Prevent Payroll Services From Paying Again</a></th>
+                </tr>
+                <tr>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'prevent_billed_services_from_billing_again'} }}">
+                           {{ agency.prevent_billed_services_from_billing_again }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'prevent_payroll_services_from_paying_again'} }}">
+                           {{ agency.prevent_payroll_services_from_paying_again }}</a></td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'billing_mirror_cutoff_num_years'} }}">Billing Mirror Cutoff (Years)</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'enforce_one_active_insurance'} }}">Enforce One Active Insuranc</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'validate_insurance_priority'} }}">Validate Insurance Priority</a></th>
+                </tr>
+                <tr>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'billing_mirror_cutoff_num_years'} }}">{{ agency.billing_mirror_cutoff_num_years }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'enforce_one_active_insurance'} }}">{{ agency.enforce_one_active_insurance }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-agency-field/%(field)s' %
+                           {'field': 'validate_insurance_priority'} }}">{{ agency.validate_insurance_priority }}</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock content%}

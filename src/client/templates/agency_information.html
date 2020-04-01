@@ -1,0 +1,99 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div class="main-header">
+        <div>
+            <h1>{{ agency.name }}</h1>
+            <br>
+            {% if update_successful == 'True'%}
+            <h5>(Agency successfully updated)</h5>
+            {% elif update_successful == 'False' %}
+            <h5>(Agency could not be updated, likely due to a server issue -- please try again in a few moments)</h5>
+            <br>
+            {% endif %}
+            <!-- TODO -- is_admin check for editing agencies -->
+            <a class="btn" href={{ update_url }}>Edit Agency</a>
+        </div>
+        <div>
+            <br>
+            <h4>Agency Information</h4>
+            <table>
+                <tr>
+                    <th>Short Name</th>
+                    <th>Agency ID</th>
+                    <th>Fiscal Year Start</th>
+                    <th>Executive Director/CEO</th>
+                </tr>
+                <tr>
+                    <td>{{ agency.short_name }}</td>
+                    <td>{{ agency.agencyID }}</td>
+                    <td>{{ agency.fiscal_year_start }}</td>
+                    <td>{{ agency.ceo }}</td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th>Main Contact</th>
+                    <th>Main Contact Email</th>
+                    <th>Main Contact Phone</th>
+                </tr>
+                <tr>
+                    <td>{{ agency.main_contact }}</td>
+                    <td>{{ agency.main_contact_email }}</td>
+                    <td>{{ agency.main_contact_phone }}</td>
+                </tr>
+            </table>
+            <br>
+            <br>
+            <h4>Finance Setups</h4>
+            <table>
+                <tr>
+                    <th>Services Cutoff Date</th>
+                    <th>Billing Cutoff Date</th>
+                    <th>ICD10 Cutoff Date</th>
+                </tr>
+                <tr>
+                    <td>{{ agency.cutoff_date_services }}</td>
+                    <td>{{ agency.cutoff_date_billing }}</td>
+                    <td>{{ agency.cutoff_date_icd10 }}</td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th>Delete Held Claims</th>
+                    <th>Held Claims Not Recognize Revenue</th>
+                </tr>
+                <tr>
+                    <td>{{ agency.delete_held_claims }}</td>
+                    <td>{{ agency.held_claim_not_recognize_revenue }}</td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th>Prevent Billed Services From Billing Again</th>
+                    <th>Prevent Payroll Services From Paying Again</th>
+                </tr>
+                <tr>
+                    <td>{{ agency.prevent_billed_services_from_billing_again }}</td>
+                    <td>{{ agency.prevent_payroll_services_from_paying_again }}</td>
+                </tr>
+            </table>
+            <table>
+                <tr>
+                    <th>Billing Mirror Cutoff (Years)</th>
+                    <th>Enforce One Active Insurance</th>
+                    <th>Validate Insurance Priority</th>
+                </tr>
+                <tr>
+                    <td>{{ agency.billing_mirror_cutoff_num_years }}</td>
+                    <td>{{ agency.enforce_one_active_insurance }}</td>
+                    <td>{{ agency.validate_insurance_priority }}</td>
+                </tr>
+            </table>
+        </div>
+        <br>
+        <br>
+        <div>
+            <a class="btn" href={{ update_url }}>Edit Agency</a>
+        </div>
+    </div>
+{% endblock content %}

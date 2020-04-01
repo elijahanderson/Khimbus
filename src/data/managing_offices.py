@@ -1,5 +1,6 @@
 import mongoengine as me
 
+
 class Office(me.EmbeddedDocument):
     """
     Class used to represent a managing office of an agency.

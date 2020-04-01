@@ -13,14 +13,15 @@ from src.services.client_service import find_client_by_ssn, find_client_by_name,
     find_client_by_phone, find_client_by_ID, find_all_clients, add_client, destroy_client, repopulate_client
 
 client_views = Blueprint('client_views', __name__, template_folder='templates')
-links = {'My Client': '/my-client',
-         'Client Information': '/client-info',
-         'Client Management': '/client-mgmt',
-         'Referrals': '/referrals',
-         'Reports': '/client-reports',
-         'State Reporting': '/state-reporting',
-         'Register New Client': '/create-client'
-         }
+links = {
+    'My Client': '/my-client',
+    'Client Information': '/client-info',
+    'Client Management': '/client-mgmt',
+    'Referrals': '/referrals',
+    'Reports': '/client-reports',
+    'State Reporting': '/state-reporting',
+    'Register New Client': '/create-client'
+}
 
 
 @client_views.route('/client')
@@ -34,13 +35,8 @@ def client_dashboard():
     client_urls = []
     for client in clients:
         client_urls.append('/client/' + str(client.clientID))
-    return render_template('client_dashboard.html',
-                           href_var=href,
-                           title='Client Dashboard',
-                           clients=clients,
-                           client_urls=client_urls,
-                           links=links,
-                           sidebar_header='Client')
+    return render_template('client_dashboard.html', href_var=href, title='Client Dashboard', clients=clients,
+                           client_urls=client_urls, links=links, sidebar_header='Client')
 
 
 @client_views.route('/my-client')
@@ -486,6 +482,7 @@ def delete_client(clientID):
 
 
 def repopulate_client_helper(clientID, field_to_update, nvalue):
+    """ Helper function for client updating. """
     href = ''
     if 'username' in session:
         href = '/user/' + session['username']
