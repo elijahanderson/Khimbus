@@ -10,8 +10,9 @@
             <h5>(Agency could not be updated, likely due to a server issue -- please try again in a few moments)</h5>
             <br>
             {% endif %}
-            <!-- TODO -- is_admin check for editing agencies -->
+            {% if is_admin == True %}
             <a class="btn" href={{ update_url }}>Edit Agency</a>
+            {% endif %}
         </div>
         <div>
             <br>
@@ -93,7 +94,9 @@
         <br>
         <br>
         <div>
+            {% if is_admin == True %}
             <a class="btn" href={{ update_url }}>Edit Agency</a>
+            {% endif %}
         </div>
     </div>
 {% endblock content %}

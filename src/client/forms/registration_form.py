@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField, SubmitField, SelectField, validators
+from wtforms import BooleanField, PasswordField, StringField, SubmitField, SelectField, validators
 
 from src.infrastructure.user_helper import user_choices
 
@@ -22,14 +22,11 @@ class RegistrationForm(FlaskForm):
                                                     validators.length(min=10, max=14)])
     job_title = SelectField('Job title: ', validators=[validators.required('Please enter job title')],
                             choices=user_choices['job_title'])
-
-    # users = find_all_users()
-    user_list = []
-    # for user in list(users):
-    #     user_list.append(user.firstname + ' ' + user.lastname)
-
     supervisor = SelectField('Supervisor: ',
                              validators=[validators.required('Please select supervisor or self supervised')],
                              choices=user_choices['supervisor'])
+    is_admin = BooleanField('Is admin? ',
+                            validators=[validators.required('Please check or leave as is')])
+
     confirm = PasswordField('Re-enter password: ')
     submit = SubmitField('Submit')

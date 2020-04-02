@@ -4,7 +4,7 @@ from src.data.users import User
 
 
 def add_user(username: str, password: str, firstname: str, lastname: str, work_email: str, phone: str, job_title: str,
-             supervisor: str) -> User:
+             supervisor: str, is_admin) -> User:
     user = User()
     user.username = username
     user.password = password
@@ -14,6 +14,7 @@ def add_user(username: str, password: str, firstname: str, lastname: str, work_e
     user.phone = phone
     user.job_title = job_title
     user.supervisor = supervisor
+    user.is_admin = is_admin
     user.save()
     print('User saved!')
     return user
@@ -63,6 +64,8 @@ def repopulate_user(username, field, nvalue):
         user.update(set__phone=nvalue)
     elif field == 'supervisor':
         user.update(set__supervisor=nvalue)
+    elif field == 'is_admin':
+        user.update(set__is_admin=nvalue)
     else:
         return False
 

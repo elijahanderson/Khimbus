@@ -1,6 +1,7 @@
 from flask import Blueprint, render_template, flash, jsonify, request, session, make_response, redirect, url_for
 from flask_login import login_required
 
+from src.services.user_service import find_user_by_username
 from src.client.forms.update_agency import UpdateAgency, UpdateAgencyBool, UpdateAgencyDate, UpdateAgencySelect
 from src.infrastructure.agency_helper import agency_choices
 from src.services.agency_service import get_agency, add_agency, repopulate_agency
@@ -23,13 +24,12 @@ def agency_info():
     href = ''
     if 'username' in session:
         href = '/user/' + session['username']
+        is_admin = find_user_by_username(session['username']).is_admin
     agency = get_agency()
     if agency:
         update_url = '/update-agency'
         return render_template('agency_information.html', href_var=href, title=agency.name, sidebar_header='Agency',
-                               links=links, agency=agency, update_url=update_url)
-    return render_template('agency_information.html', href_var=href, title=agency.name, sidebar_header='Agency',
-                           links=links, agency=agency)
+                               links=links, agency=agency, update_url=update_url, is_admin=is_admin)
 
 
 @agency_views.route('/update-agency', methods=['GET'])
@@ -114,13 +114,14 @@ def repopulate_agency_helper(field_to_update, nvalue):
     href = ''
     if 'username' in session:
         href = '/user/' + session['username']
+        is_admin = find_user_by_username(session['username']).is_admin
     update_url = '/update-agency'
     updated_agency = repopulate_agency(field_to_update, nvalue)
     if updated_agency:
         return render_template('agency_information.html', agency=updated_agency, title=updated_agency.name,
                                sidebar_header='Agency', href_var=href, links=links, update_url=update_url,
-                               update_successful='True')
+                               update_successful='True', is_admin=is_admin)
     agency = get_agency()
     return render_template('agency_information.html', agency=agency, title=agency.name,
                            sidebar_header='Agency', href_var=href, links=links, update_url=update_url,
-                           update_successful='False')
+                           update_successful='False', is_admin=is_admin)

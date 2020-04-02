@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, SelectField, StringField, validators
+from wtforms import BooleanField, SubmitField, SelectField, StringField, validators
 
 
 class UpdateUser(FlaskForm):
@@ -11,4 +11,10 @@ class UpdateUser(FlaskForm):
 class UpdateUserSelect(FlaskForm):
     cvalue = StringField('Old value: ', render_kw={'disabled': True})
     nvalue = SelectField('Select new value: ')
+    update = SubmitField('Update')
+
+
+class UpdateUserBool(FlaskForm):
+    cvalue = BooleanField('Old value: ', render_kw={'disabled': True})
+    nvalue = BooleanField('Check or uncheck: ')
     update = SubmitField('Update')

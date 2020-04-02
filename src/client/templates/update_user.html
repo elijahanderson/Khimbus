@@ -26,6 +26,9 @@
                     <th><a class="header-btn"
                            href="{{ '/update-user-field/%(username)s-%(field)s' %
                            {'username': user.username, 'field': 'supervisor'} }}">Supervisor</a></th>
+                    <th><a class="header-btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'is_admin'} }}">Is Admin</a></th>
                 </tr>
                 <tr>
                     <td><a class="btn"
@@ -46,6 +49,9 @@
                     <td><a class="btn"
                            href="{{ '/update-user-field/%(username)s-%(field)s' %
                            {'username': user.username, 'field': 'supervisor'} }}">{{ user.supervisor }}</a></td>
+                    <td><a class="btn"
+                           href="{{ '/update-user-field/%(username)s-%(field)s' %
+                           {'username': user.username, 'field': 'is_admin'} }}">{{ user.is_admin }}</a></td>
                 </tr>
             </table>
             <br>

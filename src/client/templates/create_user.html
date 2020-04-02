@@ -1,6 +1,7 @@
 {% extends "layout.html" %}
 {% block content %}
     <div class="main-header">
+      {% if is_admin == True %}
       <h1>User Registration</h1>
       <br>
       {% for message in form.username.errors %}
@@ -32,6 +33,10 @@
       {% endfor %}
 
       {% for message in form.supervisor.errors %}
+         <div>{{ message }}</div>
+      {% endfor %}
+
+      {% for message in form.is_admin.errors %}
          <div>{{ message }}</div>
       {% endfor %}
 
@@ -71,6 +76,10 @@
                     {{ form.supervisor }}
                     <br>
                     <br>
+                    {{ form.is_admin.label }}
+                    {{ form.is_admin }}
+                    <br>
+                    <br>
                     {{ form.confirm.label }}
                     {{ form.confirm }}
                     <br>
@@ -79,5 +88,8 @@
                 </div>
             </fieldset>
          </form>
+        {% else %}
+        <h2>You must have admin privileges to access this page</h2>
+        {% endif %}
     </div>
 {% endblock content %}
