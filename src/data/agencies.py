@@ -8,7 +8,21 @@ class Agency(me.Document):
     """
     Class used to represent an agency.
 
+    agencyID : the friendly ID of the agency
     name : the name of the agency
+    short_name : the name's abbreviation
+    fiscal_year_start : the month in which the agency's fiscal year begins
+    ceo : the CEO/executive of the agency
+    main_contact : the name of the agency's main contact
+    main_contact_email : the email address of the agency's main contact
+    main_contact_phone : the phone number of the agency's main contact
+
+    cutoff_date_services : services cutoff date
+    curoff_date_billing : billing cutoff date
+    cutoff_date_icd10 : services on or after this date will bill with the ICD-10 code
+    delete_held_claims : delete held claims
+    [ various other bools ]
+
     managing_offices : the embedded collection of offices that belong to an agency
     """
 

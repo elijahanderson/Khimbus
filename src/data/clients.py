@@ -5,11 +5,43 @@ class Client(me.Document):
     """
     Class used to represent a client.
 
-    name : the name of the client
-    age : the age of the client
-    intake_date: the date the client entered agency care
-    discharge_date: the date the client was discharged from agency care
-    program_ids: list of IDs of the programs the client is registered in -- weak relationship to the programs collection
+    clientID : friendly ID of the client
+    other_id_no : other ID from last system if applicable
+    firstname : the first name of the client
+    lastname : the last name of the client
+    middlename : the middle name of the client
+    suffix : client suffix
+    gender/gender_code : the gender of the client
+    genderID/genderID_code : the gender ID of the client
+    sexual_orientation/code : the sexual orientation of the client
+    race/code : the race of the client
+    ethnicity/code : the ethnicity of the client
+    ssn : the social security number of the client
+    driver_license_number : the DLN of the client
+    religion/code : the religion of the client
+    site_location : the address the client is treated at
+    medicaid : the medicaid number of the client
+
+    phone_home : the home phone number of the client
+    phone_work : the work phone number of the client
+    phone_cell : the cell phone number of the client
+    email : the email address of the client
+    contact_pref : the client's preferred method of contact
+    addresses : the address information of the client
+    guardian_info : information about the client's guardian(s)
+    emergency_contacts : information about the client's emergency contact(s)
+
+    dob : the client's date of birth
+    intake_date : the date the client entered agency care
+    discharge_date : the date the client was discharged from agency care
+    is_veteran : bool indicating if client is a veteran
+    veteran_status : the veteran status of the client
+    marital_hist : the client's marital history
+    disabilities : information about the client's disabilities, if applicable
+    employment_status/code : the employment status of the client
+    education_level/code : the highest level of education completed by the client
+    spoken_langs : list of the client's spoken languages
+    reading_langs : list of the client's reading languages
     """
     # names / identifying info
     clientID = me.IntField(required=True)
