@@ -24,6 +24,7 @@ class Agency(me.Document):
     [ various other bools ]
 
     managing_offices : the embedded collection of offices that belong to an agency
+    program_ids : list of the agency's programs
     """
 
     # general info
@@ -48,9 +49,9 @@ class Agency(me.Document):
     enforce_one_active_insurance = me.BooleanField(required=False)
     validate_insurance_priority = me.BooleanField(required=False)
 
-    # embedded collections
+    # weak relationships and embedded collections
     managing_offices = me.EmbeddedDocumentListField(Office)
-    programs = me.EmbeddedDocumentListField(Program)
+    program_ids = me.ListField()
 
     meta = {
         'db_alias': 'core',

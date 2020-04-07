@@ -94,8 +94,7 @@ def find_client_by_ID(id_no) -> Client:
 
 
 def find_all_clients():
-    clients = Client.objects()
-    return clients
+    return Client.objects()
 
 
 def repopulate_client(clientID, field_to_update, nvalue):
