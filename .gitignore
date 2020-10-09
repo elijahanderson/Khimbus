@@ -3,7 +3,9 @@
 
 # Ignore application critical vars
 application.yml
-
+info.log
+info.log.*
+env
 src/__pycache__/
 src/data/__pycache__/
 src/client/views/__pycache__/

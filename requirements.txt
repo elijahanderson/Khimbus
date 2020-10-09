@@ -1,6 +1,7 @@
 # Dependencies
 bson
 dnspython
+email_validator
 flask
 flask-login
 flask-pymongo
@@ -9,5 +10,6 @@ mock
 mongoengine
 pymongo
 pyyaml
+uWSGI
 werkzeug
 wtforms

@@ -1,4 +1,4 @@
-from client.app import app
+from src.client.app import app
 
 
 def main():
