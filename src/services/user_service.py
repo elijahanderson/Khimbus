@@ -1,6 +1,6 @@
 from mongoengine.queryset.visitor import Q
 
-from src.data.users import User
+from data.users import User
 
 
 def add_user(username: str, password: str, firstname: str, lastname: str, work_email: str, phone: str, job_title: str,

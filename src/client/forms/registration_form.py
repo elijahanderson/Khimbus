@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, PasswordField, StringField, SubmitField, SelectField, validators
 
-from src.infrastructure.user_helper import user_choices
+from infrastructure.user_helper import user_choices
 
 
 class RegistrationForm(FlaskForm):

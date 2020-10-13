@@ -3,7 +3,7 @@ from wtforms import StringField, SubmitField, IntegerField, SelectField, Boolean
     SelectMultipleField, validators
 from wtforms.fields.html5 import DateField
 
-from src.infrastructure.client_helper import client_choices
+from infrastructure.client_helper import client_choices
 
 
 class ClientRegistration(FlaskForm):

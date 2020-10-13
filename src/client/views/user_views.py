@@ -4,13 +4,13 @@ from os import environ
 import sys
 from werkzeug.security import generate_password_hash, check_password_hash
 
-from src.client.forms.login_form import LoginForm
-from src.client.forms.registration_form import RegistrationForm
-from src.client.forms.update_user import UpdateUser, UpdateUserBool, UpdateUserSelect
-from src.client.forms.user_search import UserSearchForm
-from src.infrastructure import user_state
-from src.infrastructure.user_helper import user_choices
-from src.services.user_service import find_all_users, find_user_by_username, find_user_by_name, find_user_by_phone, \
+from client.forms.login_form import LoginForm
+from client.forms.registration_form import RegistrationForm
+from client.forms.update_user import UpdateUser, UpdateUserBool, UpdateUserSelect
+from client.forms.user_search import UserSearchForm
+from infrastructure import user_state
+from infrastructure.user_helper import user_choices
+from services.user_service import find_all_users, find_user_by_username, find_user_by_name, find_user_by_phone, \
     find_user_by_email, add_user, destroy_user, repopulate_user
 
 user_views = Blueprint('user_views', __name__, template_folder='templates')

@@ -1,4 +1,4 @@
-from src.data.users import User
+from data.users import User
 
 active_account: User = None
 

@@ -1,4 +1,4 @@
-from src.data.agencies import Agency
+from data.agencies import Agency
 
 
 def add_agency(agencyID, managing_offices, programs, name, short_name, fiscal_year_start, ceo, main_contact,

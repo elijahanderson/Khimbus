@@ -3,17 +3,16 @@ from flask_login import LoginManager
 from flask_mongoengine import MongoEngine
 from logging.handlers import RotatingFileHandler
 import logging
-import sys
 import yaml
 
-from src.client.views.home_page import home_page
-from src.client.views.about_page import about_page
-from src.client.views.user_views import user_views
-from src.client.views.client_views import client_views
-from src.client.views.agency_views import agency_views
-from src.services.user_service import find_user_by_username
+from client.views.home_page import home_page
+from client.views.about_page import about_page
+from client.views.user_views import user_views
+from client.views.client_views import client_views
+from client.views.agency_views import agency_views
+from services.user_service import find_user_by_username
 
-with open('src/config/application.yml', 'r') as yml:
+with open('config/application.yml', 'r') as yml:
     conf = yaml.safe_load(yml)
     username = conf['mongo']['username']
     pwd = conf['mongo']['password']

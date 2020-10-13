@@ -2,7 +2,7 @@ from flask_wtf import FlaskForm
 from wtforms import BooleanField, SubmitField, SelectField, StringField, SelectMultipleField, validators
 from wtforms.fields.html5 import DateField
 
-from src.infrastructure.client_helper import client_choices
+from infrastructure.client_helper import client_choices
 
 
 class UpdateClient(FlaskForm):

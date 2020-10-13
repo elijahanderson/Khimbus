@@ -1,7 +1,7 @@
 from mongoengine.queryset.visitor import Q
 
-from src.data.clients import Client
-from src.infrastructure.longform_select import determine_longform_select, determine_employment
+from data.clients import Client
+from infrastructure.longform_select import determine_longform_select, determine_employment
 
 
 def add_client(clientID, firstname, lastname, middlename, suffix, gender, genderID, sexual_orientation, race, ethnicity,

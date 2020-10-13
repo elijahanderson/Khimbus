@@ -2,14 +2,14 @@ from flask import Blueprint, render_template, flash, jsonify, request, session, 
 from flask_login import login_required
 from os import environ
 
-from src.client.forms.client_registration import ClientRegistration
-from src.client.forms.client_search import ClientSearchForm
-from src.client.forms.update_client import AddAddress, AddDisability, AddEmergencyContact, AddGuardian, UpdateClient, \
+from client.forms.client_registration import ClientRegistration
+from client.forms.client_search import ClientSearchForm
+from client.forms.update_client import AddAddress, AddDisability, AddEmergencyContact, AddGuardian, UpdateClient, \
     UpdateClientBool, UpdateClientDate, UpdateClientSelect, UpdateClientSelectMultiple
-from src.infrastructure.client_helper import client_choices
-from src.infrastructure.longform_select import determine_longform_select, determine_employment, \
+from infrastructure.client_helper import client_choices
+from infrastructure.longform_select import determine_longform_select, determine_employment, \
     determine_er_relationship, determine_guardian_type
-from src.services.client_service import find_client_by_ssn, find_client_by_name, find_client_by_email, \
+from services.client_service import find_client_by_ssn, find_client_by_name, find_client_by_email, \
     find_client_by_phone, find_client_by_ID, find_all_clients, add_client, destroy_client, repopulate_client
 
 client_views = Blueprint('client_views', __name__, template_folder='templates')

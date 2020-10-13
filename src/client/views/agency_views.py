@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, flash, jsonify, request, session, make_response, redirect, url_for
 from flask_login import login_required
 
-from src.services.user_service import find_user_by_username
-from src.client.forms.update_agency import UpdateAgency, UpdateAgencyBool, UpdateAgencyDate, UpdateAgencySelect
-from src.infrastructure.agency_helper import agency_choices
-from src.services.agency_service import get_agency, add_agency, repopulate_agency
+from services.user_service import find_user_by_username
+from client.forms.update_agency import UpdateAgency, UpdateAgencyBool, UpdateAgencyDate, UpdateAgencySelect
+from infrastructure.agency_helper import agency_choices
+from services.agency_service import get_agency, add_agency, repopulate_agency
 
 import datetime
 

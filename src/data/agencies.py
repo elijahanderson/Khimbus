@@ -1,7 +1,7 @@
 import mongoengine as me
 
-from src.data.managing_offices import Office
-from src.data.programs import Program
+from data.managing_offices import Office
+from data.programs import Program
 
 
 class Agency(me.Document):
